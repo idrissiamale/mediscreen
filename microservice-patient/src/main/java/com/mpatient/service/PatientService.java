@@ -1,0 +1,52 @@
+package com.mpatient.service;
+
+
+import com.mpatient.dto.PatientRegistrationDto;
+import com.mpatient.model.Patient;
+
+import java.util.List;
+
+/**
+ * An interface which provides some CRUD methods to implement on Patient service class.
+ */
+public interface PatientService {
+    /**
+     * Retrieves a patient by its id.
+     *
+     * @param id - must not be null.
+     * @return the Patient entity with the given id or Optional#empty() if none found.
+     * @throws IllegalArgumentException if id is null or not found.
+     * @see com.mpatient.repository.PatientRepository
+     */
+    Patient findById(Integer id) throws IllegalArgumentException;
+
+    /**
+     * Retrieves all patients.
+     *
+     * @return all Patient entities.
+     * @see com.mpatient.repository.PatientRepository
+     */
+    List<Patient> findAll();
+
+    /**
+     * Saves a patient.
+     *
+     * @param patient - must not be null.
+     * @return the saved patient.
+     * @throws IllegalArgumentException if Patient entity is null.
+     * @see com.mpatient.repository.PatientRepository
+     */
+    Patient save(PatientRegistrationDto patient) throws IllegalArgumentException;
+
+
+    /**
+     * Updates patient's data.
+     *
+     * @param id - patient's id. Must not be null.
+     * @param patient - must not be null.
+     * @return the updated patient.
+     * @throws IllegalArgumentException if Patient entity/id is null or not found.
+     * @see com.mpatient.repository.PatientRepository
+     */
+    Patient update(Integer id, Patient patient) throws IllegalArgumentException;
+}
