@@ -5,6 +5,10 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+/**
+ * A model class which gathers the patient's data.
+ * This DTO is annotated using Hibernate-Validation annotations. We use it to add constraints on fields, in order to validate user's inputs.
+ */
 @Getter
 @Setter
 @ToString

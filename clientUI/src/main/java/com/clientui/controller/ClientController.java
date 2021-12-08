@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+/**
+ * Controller class which returns Mediscreen's web pages such as patients list, registration and update forms.
+ *
+ * @see com.clientui.proxy.MicroservicePatientProxy
+ */
 @Controller
 @RequestMapping("/patient")
 public class ClientController {
@@ -55,7 +60,7 @@ public class ClientController {
      * A method which saves patient's data into database after the submission is completed and without errors.
      *
      * @param registration - Patient entity. Must not be null.
-     * @param result  - permits to handle bind errors and to display it to the user when there are errors on the form fields.
+     * @param result       - permits to handle bind errors and to display it to the user when there are errors on the form fields.
      * @return it returns a success message to the user if the submission is completed and without errors. Otherwise the registration form is returned.
      */
     @PostMapping("/validate")
@@ -85,10 +90,10 @@ public class ClientController {
     /**
      * A method which updates patient's data after the submission is completed and without errors.
      *
-     * @param id     - it refers to patient's id which is used as the path variable.
-     * @param patient  - Patient entity. Must not be null.
-     * @param result - permits to handle bind errors and to display it to the user when there are errors on the form fields.
-     * @param model  - it permits to add "patients" to the model and to display all the patients registered in Mediscreen when the user is redirected to patients page.
+     * @param id      - it refers to patient's id which is used as the path variable.
+     * @param patient - Patient entity. Must not be null.
+     * @param result  - permits to handle bind errors and to display it to the user when there are errors on the form fields.
+     * @param model   - it permits to add "patients" to the model and to display all the patients registered in Mediscreen when the user is redirected to patients page.
      * @return it redirects the user to the patients page if the submission is completed and without errors. Otherwise the update_patient form is returned.
      */
     @PostMapping("/update/{id}")
