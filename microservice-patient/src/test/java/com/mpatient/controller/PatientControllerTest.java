@@ -1,7 +1,6 @@
 package com.mpatient.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mpatient.controller.PatientController;
 import com.mpatient.dto.PatientRegistrationDto;
 import com.mpatient.model.Patient;
 import com.mpatient.service.PatientService;
@@ -16,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
