@@ -2,6 +2,7 @@ package com.mpatient.service;
 
 
 import com.mpatient.dto.PatientRegistrationDto;
+import com.mpatient.exception.ResourceNotFoundException;
 import com.mpatient.model.Patient;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface PatientService {
      * @throws IllegalArgumentException if id is null or not found.
      * @see com.mpatient.repository.PatientRepository
      */
-    Patient findById(Integer id) throws IllegalArgumentException;
+    Patient findById(Integer id) throws ResourceNotFoundException;
 
     /**
      * Retrieves all patients.
@@ -48,5 +49,5 @@ public interface PatientService {
      * @throws IllegalArgumentException if Patient entity/id is null or not found.
      * @see com.mpatient.repository.PatientRepository
      */
-    Patient update(Integer id, Patient patient) throws IllegalArgumentException;
+    Patient update(Integer id, Patient patient) throws ResourceNotFoundException;
 }
