@@ -6,8 +6,6 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-
 @Getter
 @Setter
 @ToString
@@ -15,5 +13,5 @@ import java.util.List;
 public class PatientHistory {
     @Id
     private Integer id;
-    private List<String> notes;
+    private String practitionerNote;
 }
