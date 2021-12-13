@@ -7,6 +7,7 @@
     <modules>
         <module>clientUI</module>
         <module>microservice-patient</module>
+        <module>microservice-patientHistory</module>
     </modules>
 
     <parent>
