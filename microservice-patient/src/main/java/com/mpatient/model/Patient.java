@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 /**
@@ -24,16 +26,19 @@ public class Patient implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "family", nullable = false)
+    @NotNull
+    @Size(min = 3, max = 45)
     private String family;
 
-    @Column(name = "given", nullable = false)
+    @NotNull
+    @Size(min = 3, max = 45)
     private String given;
 
-    @Column(name = "dob", nullable = false)
+    @NotNull
     private String dob;
 
-    @Column(nullable = false)
+    @NotNull
+    @Column(length = 1)
     private String sex;
 
     private String address;

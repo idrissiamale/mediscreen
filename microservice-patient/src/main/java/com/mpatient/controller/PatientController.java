@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -62,7 +63,7 @@ public class PatientController {
      * @throws ResourceNotFoundException if the patient with the given id is not found.
      */
     @PutMapping(value = "/update/{id}")
-    public Patient updatePatient(@PathVariable Integer id, @RequestBody Patient patient) throws ResourceNotFoundException {
+    public Patient updatePatient(@PathVariable Integer id, @Valid @RequestBody Patient patient) throws ResourceNotFoundException {
         logger.info("Data successfully updated for the following patient: " + patient.getFamily() + " " + patient.getGiven());
         return patientService.update(id, patient);
     }
@@ -75,7 +76,7 @@ public class PatientController {
      * @throws IllegalArgumentException if the PatientRegistrationDto's fields are empty or null.
      */
     @PostMapping(value = "/add")
-    public Patient addPatient(@RequestBody PatientRegistrationDto registration) throws IllegalArgumentException {
+    public Patient addPatient(@Valid @RequestBody PatientRegistrationDto registration) throws IllegalArgumentException {
         logger.info("Patient saved successfully.");
         return patientService.save(registration);
     }

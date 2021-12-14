@@ -59,7 +59,7 @@ public class PatientControllerTest {
     }
 
     @Test
-    @DisplayName("Checking that the controller returns status code 200 when when persons are correctly fetched")
+    @DisplayName("Checking that the controller returns status code 200 when patients are correctly fetched")
     public void shouldReturn200WhenPatientsAreFound() throws Exception {
         String jsonContent = mapper.writeValueAsString(patients);
         when(patientService.findAll()).thenReturn(patients);

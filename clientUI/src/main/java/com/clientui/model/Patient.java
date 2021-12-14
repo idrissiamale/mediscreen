@@ -1,8 +1,10 @@
 package com.clientui.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -15,7 +17,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Patient {
-
+    @NotNull
     private Integer id;
 
     @NotBlank(message = "Please enter the first name")
@@ -28,11 +30,15 @@ public class Patient {
     @Size(max = 45, message = "The last name should have maximum 45 characters")
     private String given;
 
-    @NotBlank(message = "Please enter a valid date of birth")
+    @NotBlank(message = "Please enter the date of birth")
     private String dob;
 
     @NotBlank(message = "Please enter the patient gender")
+    @Size(min = 1, message = "The gender should have only 1 character : M or F")
+    @Size(max = 1, message = "The gender should have only 1 character : M or F")
     private String sex;
+
     private String address;
+
     private String phone;
 }

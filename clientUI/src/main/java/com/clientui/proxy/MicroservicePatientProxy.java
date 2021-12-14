@@ -6,6 +6,7 @@ import com.clientui.model.Patient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -40,7 +41,7 @@ public interface MicroservicePatientProxy {
      * @throws ResourceNotFoundException if the patient with the given id is not found.
      */
     @PutMapping(value = "/patient/update/{id}")
-    Patient updatePatient(@PathVariable("id") Integer id, @RequestBody Patient patient) throws ResourceNotFoundException;
+    Patient updatePatient(@PathVariable("id") Integer id, @Valid @RequestBody Patient patient) throws ResourceNotFoundException;
 
     /**
      * Mapping a POST request in order to save a new patient.
@@ -50,5 +51,5 @@ public interface MicroservicePatientProxy {
      * @throws IllegalArgumentException if the PatientRegistrationDto's fields are empty or null.
      */
     @PostMapping(value = "/patient/add")
-    Patient addPatient(@RequestBody PatientRegistrationDto registration) throws IllegalArgumentException;
+    Patient addPatient(@Valid @RequestBody PatientRegistrationDto registration) throws IllegalArgumentException;
 }
