@@ -1,7 +1,7 @@
 package com.mpatient.controller;
 
 
-import com.mpatient.dto.PatientRegistrationDto;
+import com.mpatient.dto.PatientRegistrationDTO;
 import com.mpatient.exception.ResourceNotFoundException;
 import com.mpatient.model.Patient;
 import com.mpatient.service.PatientService;
@@ -76,7 +76,7 @@ public class PatientController {
      * @throws IllegalArgumentException if the PatientRegistrationDto's fields are empty or null.
      */
     @PostMapping(value = "/add")
-    public Patient addPatient(@Valid @RequestBody PatientRegistrationDto registration) throws IllegalArgumentException {
+    public Patient addPatient(@Valid @RequestBody PatientRegistrationDTO registration) throws IllegalArgumentException {
         logger.info("Patient saved successfully.");
         return patientService.save(registration);
     }

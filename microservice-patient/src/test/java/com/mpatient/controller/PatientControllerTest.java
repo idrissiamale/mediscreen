@@ -1,7 +1,7 @@
 package com.mpatient.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mpatient.dto.PatientRegistrationDto;
+import com.mpatient.dto.PatientRegistrationDTO;
 import com.mpatient.model.Patient;
 import com.mpatient.service.PatientService;
 import org.junit.jupiter.api.BeforeEach;
@@ -107,26 +107,26 @@ public class PatientControllerTest {
     @Test
     @DisplayName("Checking that the controller returns status code 200 when patient is correctly saved")
     public void shouldReturn200WhenPatientIsSaved() throws Exception {
-        PatientRegistrationDto registration = new PatientRegistrationDto("Joann", "Loan", "2000-06-24", "F", "Bordeaux", "000000000");
+        PatientRegistrationDTO registration = new PatientRegistrationDTO("Joann", "Loan", "2000-06-24", "F", "Bordeaux", "000000000");
         Patient patientToSave = new Patient(3, registration.getFamily(), registration.getGiven(), registration.getDob(), registration.getSex(), registration.getAddress(), registration.getPhone());
         String jsonContent = mapper.writeValueAsString(patientToSave);
-        when(patientService.save(any(PatientRegistrationDto.class))).thenReturn(patientToSave);
+        when(patientService.save(any(PatientRegistrationDTO.class))).thenReturn(patientToSave);
 
         mockMvc
                 .perform(post("/patient/add").contentType(MediaType.APPLICATION_JSON)
                         .content(jsonContent))
                 .andExpect(status().isOk());
 
-        verify(patientService).save(any(PatientRegistrationDto.class));
+        verify(patientService).save(any(PatientRegistrationDTO.class));
     }
 
     @Test
     @DisplayName("Checking that the controller returns status code 400 when there are errors on Patient's fields")
     public void shouldReturn400WhenErrorOnPatientFields() throws Exception {
-        PatientRegistrationDto registration = new PatientRegistrationDto("", "Loan", "2000-06-24", "F", "Bordeaux", "000000000");
+        PatientRegistrationDTO registration = new PatientRegistrationDTO("", "Loan", "2000-06-24", "F", "Bordeaux", "000000000");
         Patient patientToSave = new Patient(3, registration.getFamily(), registration.getGiven(), registration.getDob(), registration.getSex(), registration.getAddress(), registration.getPhone());
         String jsonContent = mapper.writeValueAsString(patientToSave);
-        when(patientService.save(any(PatientRegistrationDto.class))).thenReturn(patientToSave);
+        when(patientService.save(any(PatientRegistrationDTO.class))).thenReturn(patientToSave);
 
         mockMvc
                 .perform(post("/patient/add").contentType(MediaType.APPLICATION_JSON)

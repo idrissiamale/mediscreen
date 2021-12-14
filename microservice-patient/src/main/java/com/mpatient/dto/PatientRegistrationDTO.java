@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatientRegistrationDto {
+public class PatientRegistrationDTO {
     @NotNull
     @Size(min = 3, max = 45)
     private String family;

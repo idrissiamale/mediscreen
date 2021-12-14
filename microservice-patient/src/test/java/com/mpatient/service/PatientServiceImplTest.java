@@ -1,10 +1,9 @@
 package com.mpatient.service;
 
-import com.mpatient.dto.PatientRegistrationDto;
+import com.mpatient.dto.PatientRegistrationDTO;
 import com.mpatient.exception.ResourceNotFoundException;
 import com.mpatient.model.Patient;
 import com.mpatient.repository.PatientRepository;
-import com.mpatient.service.PatientServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -71,7 +70,7 @@ public class PatientServiceImplTest {
     @Test
     @DisplayName("Checking that the patient user is correctly saved")
     public void shouldReturnNewPatientWhenSaved() {
-        PatientRegistrationDto registration = new PatientRegistrationDto("TestBordeline", "Test", "1945-06-24", "M", "2 High St", "200-333-4444");
+        PatientRegistrationDTO registration = new PatientRegistrationDTO("TestBordeline", "Test", "1945-06-24", "M", "2 High St", "200-333-4444");
         patient = new Patient(1, registration.getFamily(), registration.getGiven(), registration.getDob(), registration.getSex(), registration.getAddress(), registration.getPhone());
         when(patientRepository.save(any(Patient.class))).thenReturn(patient);
 

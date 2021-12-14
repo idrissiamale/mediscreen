@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 public class PatientHistoryDto {
     @NotNull
     private Integer id;
-    
+
     @NotNull
     private String e;
 }

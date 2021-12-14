@@ -1,7 +1,7 @@
 package com.mpatient.service;
 
 
-import com.mpatient.dto.PatientRegistrationDto;
+import com.mpatient.dto.PatientRegistrationDTO;
 import com.mpatient.exception.ResourceNotFoundException;
 import com.mpatient.model.Patient;
 
@@ -37,7 +37,7 @@ public interface PatientService {
      * @throws IllegalArgumentException if Patient entity is null.
      * @see com.mpatient.repository.PatientRepository
      */
-    Patient save(PatientRegistrationDto patient) throws IllegalArgumentException;
+    Patient save(PatientRegistrationDTO patient) throws IllegalArgumentException;
 
 
     /**

@@ -1,6 +1,6 @@
 package com.mpatient.service;
 
-import com.mpatient.dto.PatientRegistrationDto;
+import com.mpatient.dto.PatientRegistrationDTO;
 import com.mpatient.exception.ResourceNotFoundException;
 import com.mpatient.model.Patient;
 import com.mpatient.repository.PatientRepository;
@@ -49,7 +49,7 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     @Override
-    public Patient save(PatientRegistrationDto registration) throws IllegalArgumentException {
+    public Patient save(PatientRegistrationDTO registration) throws IllegalArgumentException {
         Patient patient = new Patient();
         patient.setFamily(registration.getFamily());
         patient.setGiven(registration.getGiven());
