@@ -1,6 +1,6 @@
 package com.clientui.controller;
 
-import com.clientui.dto.PatientRegistrationDto;
+import com.clientui.dto.PatientRegistrationDTO;
 import com.clientui.model.Patient;
 import com.clientui.proxy.MicroservicePatientProxy;
 import org.apache.logging.log4j.LogManager;
@@ -52,7 +52,7 @@ public class ClientController {
      * @return the registration page.
      */
     @GetMapping("/add")
-    public String showRegistrationForm(PatientRegistrationDto registration) {
+    public String showRegistrationForm(PatientRegistrationDTO registration) {
         return "registration";
     }
 
@@ -64,7 +64,7 @@ public class ClientController {
      * @return it returns a success message to the user if the submission is completed and without errors. Otherwise the registration form is returned.
      */
     @PostMapping("/validate")
-    public String registerPatient(@Valid PatientRegistrationDto registration, BindingResult result) {
+    public String registerPatient(@Valid PatientRegistrationDTO registration, BindingResult result) {
         if (result.hasErrors()) {
             return "registration";
         }

@@ -1,6 +1,6 @@
 package com.clientui.proxy;
 
-import com.clientui.dto.PatientRegistrationDto;
+import com.clientui.dto.PatientRegistrationDTO;
 import com.clientui.exception.ResourceNotFoundException;
 import com.clientui.model.Patient;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -51,5 +51,5 @@ public interface MicroservicePatientProxy {
      * @throws IllegalArgumentException if the PatientRegistrationDto's fields are empty or null.
      */
     @PostMapping(value = "/patient/add")
-    Patient addPatient(@Valid @RequestBody PatientRegistrationDto registration) throws IllegalArgumentException;
+    Patient addPatient(@Valid @RequestBody PatientRegistrationDTO registration) throws IllegalArgumentException;
 }

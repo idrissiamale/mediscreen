@@ -1,7 +1,7 @@
 package com.clientui;
 
 import com.clientui.controller.ClientController;
-import com.clientui.dto.PatientRegistrationDto;
+import com.clientui.dto.PatientRegistrationDTO;
 import com.clientui.model.Patient;
 import com.clientui.proxy.MicroservicePatientProxy;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +32,7 @@ public class ClientControllerTest {
     private MockMvc mockMvc;
     private Patient patient;
     private Patient patientUpdated;
-    private PatientRegistrationDto registration;
+    private PatientRegistrationDTO registration;
     private List<Patient> patients;
 
 
@@ -43,7 +43,7 @@ public class ClientControllerTest {
     @BeforeEach
     public void setup() {
         ClientController clientController = new ClientController(microservicePatientProxy);
-        registration = new PatientRegistrationDto("TestBordeline", "Test", "1945-06-24", "M", "2 High St", "200-333-4444");
+        registration = new PatientRegistrationDTO("TestBordeline", "Test", "1945-06-24", "M", "2 High St", "200-333-4444");
         patient = new Patient(1, registration.getFamily(), registration.getGiven(), registration.getDob(), registration.getSex(), registration.getAddress(), registration.getPhone());
         patientUpdated = new Patient(1, "TestBordeline", "Lili", "1945-06-24", "M", "2 High St", "200-333-4444");
         Patient patient2 = new Patient(2, "TestInDanger", "Test", "1980-06-24", "F", "3 Club Road", "300-444-5555");
@@ -101,7 +101,7 @@ public class ClientControllerTest {
     @Test
     @DisplayName("Checking that the registration page displays a success message when the patient has been successfully registered to our application")
     public void shouldReturnRegistrationSuccessMessageWhenPatientHasBeenSuccessfullyRegistered() throws Exception {
-        when(microservicePatientProxy.addPatient(any(PatientRegistrationDto.class))).thenReturn(patient);
+        when(microservicePatientProxy.addPatient(any(PatientRegistrationDTO.class))).thenReturn(patient);
 
         this.mockMvc.perform(post("/patient/validate").contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("family", "TestBordeline")
@@ -117,7 +117,7 @@ public class ClientControllerTest {
                 .andExpect(redirectedUrl("/patient/add?success"))
                 .andExpect(model().hasNoErrors());
 
-        verify(microservicePatientProxy).addPatient(any(PatientRegistrationDto.class));
+        verify(microservicePatientProxy).addPatient(any(PatientRegistrationDTO.class));
         assertEquals("TestBordeline", registration.getFamily());
     }
 
