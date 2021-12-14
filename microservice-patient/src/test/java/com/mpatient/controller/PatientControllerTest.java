@@ -17,8 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -74,9 +73,9 @@ public class PatientControllerTest {
     }
 
     @Test
-    @DisplayName("Checking that the controller returns status code 200 when when patient's data were correctly updated")
+    @DisplayName("Checking that the controller returns status code 200  when patient's data were correctly updated")
     public void shouldReturn200WhenPatientDataUpdated() throws Exception {
-        Patient patientUpdated = new Patient(1, "TestBordeline", "Lili", "1945-06-24", "M", "2 High St", "200-333-4444");
+        Patient patientUpdated = new Patient(1, "TestBordeline", "Lilian", "1945-06-24", "M", "2 High St", "200-333-4444");
         String jsonContent = mapper.writeValueAsString(patientUpdated);
         when(patientService.update(patient.getId(), patient)).thenReturn(patientUpdated);
 
@@ -90,9 +89,25 @@ public class PatientControllerTest {
     }
 
     @Test
-    @DisplayName("Checking that the controller returns status code 201 when person is correctly saved")
-    public void shouldReturn201WhenPersonIsSaved() throws Exception {
-        PatientRegistrationDto registration = new PatientRegistrationDto("Joanna", "Loan", "2000-06-24", "F", "Bordeaux", "000000000");
+    @DisplayName("Checking that the controller returns status code 400 when there are errors on the data of the patient we want to update")
+    public void shouldReturn400WhenErrorsOnDataOfPatientToUpdate() throws Exception {
+        Patient patientUpdated = new Patient(1, "TestBordeline", "Lilian", "1945-06-24", null, "2 High St", "200-333-4444");
+        String jsonContent = mapper.writeValueAsString(patientUpdated);
+        when(patientService.update(patient.getId(), patient)).thenReturn(patientUpdated);
+
+        mockMvc
+                .perform(put("/patient/update/{id}", 1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonContent))
+                .andExpect(status().isBadRequest());
+
+        verifyNoInteractions(patientService);
+    }
+
+    @Test
+    @DisplayName("Checking that the controller returns status code 200 when patient is correctly saved")
+    public void shouldReturn200WhenPatientIsSaved() throws Exception {
+        PatientRegistrationDto registration = new PatientRegistrationDto("Joann", "Loan", "2000-06-24", "F", "Bordeaux", "000000000");
         Patient patientToSave = new Patient(3, registration.getFamily(), registration.getGiven(), registration.getDob(), registration.getSex(), registration.getAddress(), registration.getPhone());
         String jsonContent = mapper.writeValueAsString(patientToSave);
         when(patientService.save(any(PatientRegistrationDto.class))).thenReturn(patientToSave);
@@ -103,5 +118,21 @@ public class PatientControllerTest {
                 .andExpect(status().isOk());
 
         verify(patientService).save(any(PatientRegistrationDto.class));
+    }
+
+    @Test
+    @DisplayName("Checking that the controller returns status code 400 when there are errors on Patient's fields")
+    public void shouldReturn400WhenErrorOnPatientFields() throws Exception {
+        PatientRegistrationDto registration = new PatientRegistrationDto("", "Loan", "2000-06-24", "F", "Bordeaux", "000000000");
+        Patient patientToSave = new Patient(3, registration.getFamily(), registration.getGiven(), registration.getDob(), registration.getSex(), registration.getAddress(), registration.getPhone());
+        String jsonContent = mapper.writeValueAsString(patientToSave);
+        when(patientService.save(any(PatientRegistrationDto.class))).thenReturn(patientToSave);
+
+        mockMvc
+                .perform(post("/patient/add").contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonContent))
+                .andExpect(status().isBadRequest());
+
+        verifyNoInteractions(patientService);
     }
 }
