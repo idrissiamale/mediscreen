@@ -32,6 +32,6 @@ public class PatientRegistrationDto {
     private String sex;
 
     private String address;
-    
+
     private String phone;
 }
