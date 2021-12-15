@@ -7,16 +7,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="microservice-note" />
         <module name="clientUI" />
-        <module name="microservice-patientHistory" />
         <module name="microservice-patient" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="microservice-patientHistory" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="MediscreenProject" options="-parameters" />
       <module name="clientUI" options="-parameters" />
+      <module name="microservice-note" options="-parameters" />
       <module name="microservice-patient" options="-parameters" />
       <module name="microservice-patientHistory" options="-parameters" />
     </option>

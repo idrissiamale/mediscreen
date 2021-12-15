@@ -1,11 +1,11 @@
-package com.mpatientHistory;
+package com.mnote;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MicroservicePatientHistoryApplication {
+public class MicroserviceNoteApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MicroservicePatientHistoryApplication.class, args);
+        SpringApplication.run(MicroserviceNoteApplication.class, args);
     }
 }

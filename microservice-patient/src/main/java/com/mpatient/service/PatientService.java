@@ -16,7 +16,7 @@ public interface PatientService {
      *
      * @param id - must not be null.
      * @return the Patient entity with the given id or Optional#empty() if none found.
-     * @throws IllegalArgumentException if id is null or not found.
+     * @throws ResourceNotFoundException if id is not found.
      * @see com.mpatient.repository.PatientRepository
      */
     Patient findById(Integer id) throws ResourceNotFoundException;
@@ -46,7 +46,7 @@ public interface PatientService {
      * @param id - patient's id. Must not be null.
      * @param patient - must not be null.
      * @return the updated patient.
-     * @throws IllegalArgumentException if Patient entity/id is null or not found.
+     * @throws ResourceNotFoundException if Patient is not found.
      * @see com.mpatient.repository.PatientRepository
      */
     Patient update(Integer id, Patient patient) throws ResourceNotFoundException;
