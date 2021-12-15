@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 @ToString
 public class PatientHistoryDTO {
     private Integer patId;
+
     @NotNull
     private String e;
 }
