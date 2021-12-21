@@ -30,12 +30,6 @@ public class PatientHistoryController {
 
     }
 
-    @GetMapping(value = "/list")
-    public List<Note> getAllPatients() {
-        logger.info("Patients' histories found successfully.");
-        return patientHistoryService.findAll();
-    }
-
     @PutMapping(value = "/update/{id}")
     public Note updatePatientHistory(@PathVariable String id, @Valid @RequestBody Note note) throws ResourceNotFoundException {
         logger.info("Note successfully updated for the following patient: " + note.getPatId());
