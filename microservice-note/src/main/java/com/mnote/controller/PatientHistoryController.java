@@ -1,8 +1,8 @@
 package com.mnote.controller;
 
-import com.mnote.dto.PatientHistoryDTO;
+import com.mnote.dto.NoteDTO;
 import com.mnote.exception.ResourceNotFoundException;
-import com.mnote.model.PatientHistory;
+import com.mnote.model.Note;
 import com.mnote.service.PatientHistoryService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,27 +24,27 @@ public class PatientHistoryController {
     }
 
     @GetMapping(value = "/{id}")
-    public PatientHistory getPatient(@PathVariable Integer id) throws ResourceNotFoundException {
+    public List<Note> getPatientHistory(@PathVariable Integer id) throws ResourceNotFoundException {
         logger.info("Patient's history found successfully.");
-        return patientHistoryService.findById(id);
+        return patientHistoryService.findByPatId(id);
 
     }
 
     @GetMapping(value = "/list")
-    public List<PatientHistory> getAllPatients() {
+    public List<Note> getAllPatients() {
         logger.info("Patients' histories found successfully.");
         return patientHistoryService.findAll();
     }
 
     @PutMapping(value = "/update/{id}")
-    public PatientHistory updatePatient(@PathVariable Integer id, @Valid @RequestBody PatientHistory history) throws ResourceNotFoundException {
-        logger.info("History successfully updated for the following patient: " + history.getPatId());
-        return patientHistoryService.update(id, history);
+    public Note updatePatientHistory(@PathVariable String id, @Valid @RequestBody Note note) throws ResourceNotFoundException {
+        logger.info("Note successfully updated for the following patient: " + note.getPatId());
+        return patientHistoryService.update(id, note);
     }
 
     @PostMapping(value = "/add")
-    public PatientHistory addPatientHistory(@Valid @RequestBody PatientHistoryDTO history) throws IllegalArgumentException {
-        logger.info("Patient's history saved successfully.");
-        return patientHistoryService.save(history);
+    public Note addNote(@Valid @RequestBody NoteDTO note) throws IllegalArgumentException {
+        logger.info("Patient's note saved successfully.");
+        return patientHistoryService.save(note);
     }
 }

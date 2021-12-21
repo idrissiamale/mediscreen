@@ -1,17 +1,17 @@
 package com.mnote.service;
 
-import com.mnote.dto.PatientHistoryDTO;
+import com.mnote.dto.NoteDTO;
 import com.mnote.exception.ResourceNotFoundException;
-import com.mnote.model.PatientHistory;
+import com.mnote.model.Note;
 
 import java.util.List;
 
 public interface PatientHistoryService {
-    PatientHistory findById(Integer id) throws ResourceNotFoundException;
+    List<Note> findByPatId(Integer patId) throws ResourceNotFoundException;
 
-    List<PatientHistory> findAll();
+    List<Note> findAll();
 
-    PatientHistory save(PatientHistoryDTO history) throws IllegalArgumentException;
+    Note save(NoteDTO note) throws IllegalArgumentException;
 
-    PatientHistory update(Integer id, PatientHistory history) throws ResourceNotFoundException;
+    Note update(String id, Note note) throws ResourceNotFoundException;
 }

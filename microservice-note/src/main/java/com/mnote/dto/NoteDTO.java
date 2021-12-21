@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @ToString
-public class PatientHistoryDTO {
+public class NoteDTO {
     private Integer patId;
 
     @NotNull
