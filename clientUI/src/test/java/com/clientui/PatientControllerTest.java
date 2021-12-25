@@ -1,6 +1,6 @@
 package com.clientui;
 
-import com.clientui.controller.ClientController;
+import com.clientui.controller.PatientController;
 import com.clientui.dto.PatientRegistrationDTO;
 import com.clientui.model.Patient;
 import com.clientui.proxy.MicroservicePatientProxy;
@@ -27,8 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
-@WebMvcTest(controllers = ClientController.class)
-public class ClientControllerTest {
+@WebMvcTest(controllers = PatientController.class)
+public class PatientControllerTest {
     private MockMvc mockMvc;
     private Patient patient;
     private Patient patientUpdated;
@@ -42,7 +42,7 @@ public class ClientControllerTest {
 
     @BeforeEach
     public void setup() {
-        ClientController clientController = new ClientController(microservicePatientProxy);
+        PatientController patientController = new PatientController(microservicePatientProxy);
         registration = new PatientRegistrationDTO("TestBordeline", "Test", "1945-06-24", "M", "2 High St", "200-333-4444");
         patient = new Patient(1, registration.getFamily(), registration.getGiven(), registration.getDob(), registration.getSex(), registration.getAddress(), registration.getPhone());
         patientUpdated = new Patient(1, "TestBordeline", "Lili", "1945-06-24", "M", "2 High St", "200-333-4444");
@@ -50,7 +50,7 @@ public class ClientControllerTest {
         patients = new ArrayList<>();
         patients.add(patient);
         patients.add(patient2);
-        this.mockMvc = MockMvcBuilders.standaloneSetup(clientController).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(patientController).build();
     }
 
     @Test

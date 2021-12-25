@@ -17,7 +17,6 @@ import javax.validation.constraints.NotNull;
 public class Note {
     @Id
     @Field("_id")
-    @JsonIgnore
     private String id;
 
     @NotNull

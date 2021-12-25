@@ -23,13 +23,13 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping("/patient")
-public class ClientController {
-    private static final Logger logger = LogManager.getLogger("ClientController");
+public class PatientController {
+    private static final Logger logger = LogManager.getLogger("PatientController");
 
     private MicroservicePatientProxy microservicePatientProxy;
 
     @Autowired
-    public ClientController(MicroservicePatientProxy microservicePatientProxy) {
+    public PatientController(MicroservicePatientProxy microservicePatientProxy) {
         this.microservicePatientProxy = microservicePatientProxy;
     }
 

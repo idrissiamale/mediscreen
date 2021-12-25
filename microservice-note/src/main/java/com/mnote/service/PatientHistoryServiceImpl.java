@@ -24,18 +24,19 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
 
 
     @Override
+    public Note findById(String id) throws ResourceNotFoundException {
+        return patientHistoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("NoteNotFound", "The id provided is incorrect or does not exist: " + id, HttpStatus.NOT_FOUND));
+    }
+
+    @Override
     public List<Note> findByPatId(Integer patId) throws ResourceNotFoundException {
-        if (patId == null) {
+        List<Note> notes = patientHistoryRepository.findByPatId(patId);
+        if (notes.isEmpty()) {
             throw new ResourceNotFoundException("PatientHistoryNotFound", "The id provided is incorrect or does not exist: " + patId, HttpStatus.NOT_FOUND);
         }
         logger.info("Patient's history was successfully fetched.");
         return patientHistoryRepository.findByPatId(patId);
-    }
 
-    @Override
-    public List<Note> findAll() {
-        logger.info("Patients' histories were successfully fetched.");
-        return patientHistoryRepository.findAll();
     }
 
     @Override

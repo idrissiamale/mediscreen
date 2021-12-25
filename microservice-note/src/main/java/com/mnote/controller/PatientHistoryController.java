@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/patHistory")
+@RequestMapping(value = "/patHistory")
 public class PatientHistoryController {
     private static final Logger logger = LogManager.getLogger("PatientHistoryController");
     private PatientHistoryService patientHistoryService;
@@ -23,10 +23,16 @@ public class PatientHistoryController {
         this.patientHistoryService = patientHistoryService;
     }
 
-    @GetMapping(value = "/{id}")
-    public List<Note> getPatientHistory(@PathVariable Integer id) throws ResourceNotFoundException {
+    @GetMapping(value = "/note/{id}")
+    public Note getNote(@PathVariable String id) throws ResourceNotFoundException {
+        logger.info("Patient's note found successfully.");
+        return patientHistoryService.findById(id);
+    }
+
+    @GetMapping(value = "/notes/{patId}")
+    public List<Note> getPatientHistory(@PathVariable Integer patId) throws ResourceNotFoundException {
         logger.info("Patient's history found successfully.");
-        return patientHistoryService.findByPatId(id);
+        return patientHistoryService.findByPatId(patId);
 
     }
 

@@ -14,7 +14,7 @@ public class Note {
     @NotNull
     private String id;
 
-    @NotBlank(message = "Please enter the id of the patient")
+    @NotNull(message = "Please enter the id of the patient")
     private Integer patId;
 
     @NotBlank(message = "Please add your notes or recommendations")
