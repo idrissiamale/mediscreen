@@ -40,7 +40,7 @@ public class PatientHistoryController {
     }
 
     @GetMapping("/add")
-    public String showRegistrationForm(NoteDTO note, Model model) {
+    public String showRegistrationForm(NoteDTO note) {
         return "note";
     }
 
