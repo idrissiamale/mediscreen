@@ -18,5 +18,5 @@ public class Note {
     private Integer patId;
 
     @NotBlank(message = "Please add your notes or recommendations")
-    private String note;
+    private String e;
 }

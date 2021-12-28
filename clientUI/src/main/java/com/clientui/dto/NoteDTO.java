@@ -15,5 +15,5 @@ public class NoteDTO {
     private Integer patId;
 
     @NotBlank(message = "Please add your notes or recommendations")
-    private String e;
+    private String note;
 }
