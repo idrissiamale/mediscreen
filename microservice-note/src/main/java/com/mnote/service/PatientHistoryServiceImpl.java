@@ -2,6 +2,7 @@ package com.mnote.service;
 
 import com.mnote.dto.NoteDTO;
 import com.mnote.exception.ResourceNotFoundException;
+import com.mnote.mapper.NoteMapper;
 import com.mnote.model.Note;
 import com.mnote.repository.PatientHistoryRepository;
 import org.apache.logging.log4j.LogManager;
@@ -16,45 +17,43 @@ import java.util.List;
 public class PatientHistoryServiceImpl implements PatientHistoryService {
     private static final Logger logger = LogManager.getLogger("PatientHistoryServiceImpl");
     private PatientHistoryRepository patientHistoryRepository;
+    private NoteMapper noteMapper;
 
     @Autowired
-    public PatientHistoryServiceImpl(PatientHistoryRepository patientHistoryRepository) {
+    public PatientHistoryServiceImpl(PatientHistoryRepository patientHistoryRepository, NoteMapper noteMapper) {
         this.patientHistoryRepository = patientHistoryRepository;
-    }
-
-
-    @Override
-    public Note findById(String id) throws ResourceNotFoundException {
-        return patientHistoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("NoteNotFound", "The id provided is incorrect or does not exist: " + id, HttpStatus.NOT_FOUND));
+        this.noteMapper = noteMapper;
     }
 
     @Override
-    public List<Note> findByPatId(Integer patId) throws ResourceNotFoundException {
+    public NoteDTO findById(String id) throws ResourceNotFoundException {
+        return noteMapper.modelToDto(patientHistoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("NoteNotFound", "The id provided is incorrect or does not exist: " + id, HttpStatus.NOT_FOUND)));
+    }
+
+    @Override
+    public List<NoteDTO> findByPatId(Integer patId) throws ResourceNotFoundException {
         List<Note> notes = patientHistoryRepository.findByPatId(patId);
         if (notes.isEmpty()) {
             throw new ResourceNotFoundException("PatientHistoryNotFound", "The id provided is incorrect or does not exist: " + patId, HttpStatus.NOT_FOUND);
         }
         logger.info("Patient's history was successfully fetched.");
-        return patientHistoryRepository.findByPatId(patId);
+        return noteMapper.modelsToDto(patientHistoryRepository.findByPatId(patId));
 
     }
 
     @Override
-    public Note save(NoteDTO note) throws IllegalArgumentException {
-        Note noteToSave = new Note();
-        noteToSave.setPatId(note.getPatId());
-        noteToSave.setNote(note.getE());
+    public Note save(NoteDTO noteDTO) throws IllegalArgumentException {
         logger.info("Patient's note was saved successfully.");
-        return patientHistoryRepository.save(noteToSave);
+        return patientHistoryRepository.save(noteMapper.dtoToModel(noteDTO));
     }
 
     @Override
-    public Note update(String id, Note note) throws ResourceNotFoundException {
-        return patientHistoryRepository.findById(id).map(noteToUpdate -> {
-            noteToUpdate.setPatId(note.getPatId());
-            noteToUpdate.setNote(note.getNote());
+    public NoteDTO update(String id, NoteDTO noteDTO) throws ResourceNotFoundException {
+        return noteMapper.modelToDto(patientHistoryRepository.findById(id).map(noteToUpdate -> {
+            noteToUpdate.setPatId(noteDTO.getPatId());
+            noteToUpdate.setE(noteDTO.getNote());
             logger.info("Patient's history was updated successfully.");
             return patientHistoryRepository.save(noteToUpdate);
-        }).orElseThrow(() -> new ResourceNotFoundException("HistoryNotFound", "The id provided is incorrect or does not exist: " + id, HttpStatus.NOT_FOUND));
+        }).orElseThrow(() -> new ResourceNotFoundException("HistoryNotFound", "The id provided is incorrect or does not exist: " + id, HttpStatus.NOT_FOUND)));
     }
 }

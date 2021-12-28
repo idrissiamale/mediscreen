@@ -19,11 +19,6 @@
     <div class="row d-flex justify-content-sm-center ">
         <div class="col-md-4">
             <h1>Add Note</h1>
-            <!-- Success message -->
-            <div th:if="${param.success}">
-                <div class="alert alert-success"> The note has been successfully saved.
-                </div>
-            </div>
             <form th:action="@{/patHistory/validate}" method="post" th:object="${noteDTO}"
                   class="border border-2 rounded w-100 p-3">
                 <div class="form-group mb-3 d-flex justify-content-center ">

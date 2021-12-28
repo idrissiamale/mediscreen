@@ -11,14 +11,14 @@ import java.util.List;
 
 @FeignClient(name = "microservice-note", url = "${mnote.url}")
 public interface MicroservicePatientHistoryProxy {
-    @GetMapping(value = "patHistory/note/{mongoDBid}")
-    Note getNote(@PathVariable String mongoDBid) throws ResourceNotFoundException;
+    @GetMapping(value = "patHistory/note/{id}")
+    Note getNote(@PathVariable("id") String id) throws ResourceNotFoundException;
 
     @GetMapping(value = "/patHistory/notes/{patId}")
-    List<Note> getPatientHistory(@PathVariable Integer patId) throws ResourceNotFoundException;
+    List<Note> getPatientHistory(@PathVariable("patId") Integer patId) throws ResourceNotFoundException;
 
-    @PutMapping(value = "/patHistory/update/{mongoDBid}")
-    Note updatePatientHistory(@PathVariable String mongoDBid, @Valid @RequestBody Note note) throws ResourceNotFoundException;
+    @PutMapping(value = "/patHistory/update/{id}")
+    Note updatePatientHistory(@PathVariable("id") String id, @Valid @RequestBody Note note) throws ResourceNotFoundException;
 
     @PostMapping(value = "/patHistory/add")
     Note addNote(@Valid @RequestBody NoteDTO note) throws IllegalArgumentException;

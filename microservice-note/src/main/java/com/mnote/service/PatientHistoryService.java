@@ -7,11 +7,11 @@ import com.mnote.model.Note;
 import java.util.List;
 
 public interface PatientHistoryService {
-    Note findById(String id) throws ResourceNotFoundException;
+    NoteDTO findById(String id) throws ResourceNotFoundException;
 
-    List<Note> findByPatId(Integer patId) throws ResourceNotFoundException;
+    List<NoteDTO> findByPatId(Integer patId) throws ResourceNotFoundException;
 
-    Note save(NoteDTO note) throws IllegalArgumentException;
+    Note save(NoteDTO noteDTO) throws IllegalArgumentException;
 
-    Note update(String id, Note note) throws ResourceNotFoundException;
+    NoteDTO update(String id, NoteDTO noteDTO) throws ResourceNotFoundException;
 }

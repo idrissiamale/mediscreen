@@ -45,13 +45,13 @@ public class PatientHistoryController {
     }
 
     @PostMapping("/validate")
-    public String addNote(@Valid NoteDTO note, BindingResult result) {
+    public String addNote(@Valid NoteDTO note, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "note";
         }
         logger.info("Patient's note was saved successfully.");
         microservicePatientHistoryProxy.addNote(note);
-        return "redirect:/patHistory/add?success";
+        return "redirect:/patHistory/notes/" + note.getPatId();
     }
 
     @GetMapping("/update/{id}")

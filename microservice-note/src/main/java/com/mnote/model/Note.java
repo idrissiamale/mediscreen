@@ -1,6 +1,5 @@
 package com.mnote.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,5 +22,5 @@ public class Note {
     private Integer patId;
 
     @NotNull
-    private String note;
+    private String e;
 }

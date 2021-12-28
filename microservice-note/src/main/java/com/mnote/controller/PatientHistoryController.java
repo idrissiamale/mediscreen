@@ -24,27 +24,26 @@ public class PatientHistoryController {
     }
 
     @GetMapping(value = "/note/{id}")
-    public Note getNote(@PathVariable String id) throws ResourceNotFoundException {
+    public NoteDTO getNote(@PathVariable String id) throws ResourceNotFoundException {
         logger.info("Patient's note found successfully.");
         return patientHistoryService.findById(id);
     }
 
     @GetMapping(value = "/notes/{patId}")
-    public List<Note> getPatientHistory(@PathVariable Integer patId) throws ResourceNotFoundException {
+    public List<NoteDTO> getPatientHistory(@PathVariable Integer patId) throws ResourceNotFoundException {
         logger.info("Patient's history found successfully.");
         return patientHistoryService.findByPatId(patId);
-
     }
 
     @PutMapping(value = "/update/{id}")
-    public Note updatePatientHistory(@PathVariable String id, @Valid @RequestBody Note note) throws ResourceNotFoundException {
-        logger.info("Note successfully updated for the following patient: " + note.getPatId());
-        return patientHistoryService.update(id, note);
+    public NoteDTO updatePatientHistory(@PathVariable String id, @Valid @RequestBody NoteDTO noteDTO) throws ResourceNotFoundException {
+        logger.info("Note successfully updated for the following patient: " + noteDTO.getPatId());
+        return patientHistoryService.update(id, noteDTO);
     }
 
     @PostMapping(value = "/add")
-    public Note addNote(@Valid @RequestBody NoteDTO note) throws IllegalArgumentException {
+    public Note addNote(@Valid @RequestBody NoteDTO noteDTO) throws IllegalArgumentException {
         logger.info("Patient's note saved successfully.");
-        return patientHistoryService.save(note);
+        return patientHistoryService.save(noteDTO);
     }
 }
