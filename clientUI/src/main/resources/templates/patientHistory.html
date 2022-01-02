@@ -18,8 +18,6 @@
 <div class="container d-flex justify-content-sm-center">
     <div class="col-md-10">
         <h1 class="align-text-end">Patient History</h1>
-        <div class="d-inline col-4"><a href="#" th:href="@{/patHistory/add}" class="float-end btn btn-secondary"
-                                       style="background-color:#128499">Add New Note</a></div>
         <table class="table table-striped text-center border border-secondary border-1">
             <thead>
             <tr>
@@ -28,10 +26,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="note : ${notes}">
-                <td style="width: 60%" th:text="${note.note}"></td>
+            <tr th:each="noteDTO : ${notes}">
+                <td style="width: 60%" th:text="${noteDTO.note}"></td>
                 <td style="width: 10%" class="text-center">
-                    <a th:href="@{/patHistory/update/{id}(id=${note.id})}" style="background-color:#128499"
+                    <a th:href="@{/patHistory/update/{id}(id=${noteDTO.id})}" style="background-color:#128499"
                        class="form-control btn btn-success">Edit</a>
                 </td>
             </tr>

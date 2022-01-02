@@ -11,6 +11,8 @@ import javax.validation.constraints.NotNull;
 @Setter
 @ToString
 public class NoteDTO {
+    private String id;
+
     @NotNull(message = "Please enter the id of the patient")
     private Integer patId;
 

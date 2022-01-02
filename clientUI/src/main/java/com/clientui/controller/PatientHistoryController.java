@@ -34,42 +34,41 @@ public class PatientHistoryController {
 
     @GetMapping("/notes/{patId}")
     public String home(@PathVariable("patId") Integer patId, Model model) {
-        List<Note> notes = microservicePatientHistoryProxy.getPatientHistory(patId);
+        List<NoteDTO> notes = microservicePatientHistoryProxy.getPatientHistory(patId);
         model.addAttribute("notes", notes);
         return "patientHistory";
     }
 
     @GetMapping("/add")
-    public String showRegistrationForm(NoteDTO note) {
-        return "note";
+    public String showAddNoteForm(NoteDTO noteDTO) {
+        return "add_note";
     }
 
     @PostMapping("/validate")
-    public String addNote(@Valid NoteDTO note, BindingResult result, Model model) {
+    public String addNote(@Valid NoteDTO noteDTO, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "note";
+            return "add_note";
         }
         logger.info("Patient's note was saved successfully.");
-        microservicePatientHistoryProxy.addNote(note);
-        return "redirect:/patHistory/notes/" + note.getPatId();
+        microservicePatientHistoryProxy.addNote(noteDTO);
+        return "redirect:/patHistory/notes/" + noteDTO.getPatId();
     }
 
     @GetMapping("/update/{id}")
-    public String showUpdateForm(@PathVariable("id") String id, Model model) {
-        Note note = microservicePatientHistoryProxy.getNote(id);
+    public String showUpdateNoteForm(@PathVariable("id") String id, Model model) {
+        NoteDTO noteDTO = microservicePatientHistoryProxy.getNote(id);
         logger.info("Patient was successfully fetched.");
-        model.addAttribute("note", note);
+        model.addAttribute("noteDTO", noteDTO);
         return "update_note";
     }
 
     @PostMapping("/update/{id}")
-    public String updatePatient(@PathVariable("id") String id, @Valid Note note, BindingResult result, Model model) {
+    public String updatePatient(@PathVariable("id") String id, @Valid NoteDTO noteDTO, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "update_note";
         }
         logger.info("Patient data were updated successfully.");
-        microservicePatientHistoryProxy.updatePatientHistory(id, note);
-        model.addAttribute("notes", microservicePatientHistoryProxy.getPatientHistory(note.getPatId()));
-        return "redirect:/patHistory/notes/" + note.getPatId();
+        microservicePatientHistoryProxy.updatePatientHistory(id, noteDTO);
+        return "redirect:/patHistory/notes/" + noteDTO.getPatId();
     }
 }

@@ -19,7 +19,7 @@
     <div class="row d-flex justify-content-sm-center">
         <div class="col-lg-4">
             <h1>Update Patient's note</h1>
-            <form action="#" th:action="@{/patHistory/update/{id}(id=${note.id})}" th:object="${note}" method="post"
+            <form action="#" th:action="@{/patHistory/update/{id}(id=${noteDTO.id})}" th:object="${noteDTO}" method="post"
                   class="border border-2 rounded w-100 p-3">
                 <div class="form-group mb-3 d-flex justify-content-center ">
                     <button type="button" class="btn btn-secondary" style="background-color:#128499">Mediscreen</button>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <input type="hidden" th:field="*{id}">
-                    <a class="form-control btn btn-danger me-4" th:href="@{/patHistory/notes/{patId}(patId=${note.patId})}">Cancel</a>
+                    <a class="form-control btn btn-danger me-4" th:href="@{/patHistory/notes/{patId}(patId=${noteDTO.patId})}">Cancel</a>
                     <button type="submit" class="form-control btn btn-success" style="background-color:#128499">Update
                     </button>
                 </div>

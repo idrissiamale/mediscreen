@@ -30,11 +30,10 @@
                     <span th:if="${#fields.hasErrors('patId')}" th:errors="*{patId}" class="text-danger"></span>
                 </div>
                 <div class="form-group mb-3">
-                    <textarea class="form-control" id="inputNote" placeholder="Add your notes or recommendations here" th:field="*{e}" rows="6"></textarea>
-                    <span th:if="${#fields.hasErrors('e')}" th:errors="*{e}" class="text-danger"></span>
+                    <textarea class="form-control" id="inputNote" placeholder="Add your notes or recommendations here" th:field="*{note}" rows="6"></textarea>
+                    <span th:if="${#fields.hasErrors('note')}" th:errors="*{note}" class="text-danger"></span>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <a class="form-control btn btn-danger me-4" th:href="@{/patHistory/notes/{patId}(patId=${noteDTO.patId})}">Cancel</a>
                     <button type="submit" class="form-control btn btn-success" style="background-color:#128499" >Save</button>
                 </div>
             </form>
