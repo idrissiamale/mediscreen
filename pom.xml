@@ -9,6 +9,7 @@
         <module>microservice-patient</module>
         <module>microservice-note</module>
         <module>microservice-diabeteReport</module>
+        <module>microservice-diabetesReport</module>
     </modules>
 
     <parent>

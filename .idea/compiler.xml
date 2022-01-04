@@ -7,8 +7,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="microservice-diabetesReport" />
         <module name="microservice-patient" />
-        <module name="microservice-diabeteReport" />
       </profile>
       <profile name="Annotation profile for mediscreen" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -32,7 +32,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="MediscreenProject" options="-parameters" />
       <module name="clientUI" options="-parameters" />
-      <module name="microservice-diabeteReport" options="-parameters" />
+      <module name="microservice-diabetesReport" options="-parameters" />
       <module name="microservice-note" options="-parameters" />
       <module name="microservice-patient" options="-parameters" />
       <module name="microservice-patientHistory" options="-parameters" />

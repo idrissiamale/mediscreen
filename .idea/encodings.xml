@@ -2,7 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/clientUI/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/microservice-diabeteReport/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/microservice-diabetesReport/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/microservice-note/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/microservice-patient/src/main/java" charset="UTF-8" />
   </component>
