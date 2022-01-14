@@ -37,10 +37,22 @@ public class PatientController {
      * @throws ResourceNotFoundException if the patient we want to fetch is not found.
      */
     @GetMapping(value = "/{id}")
-    public Patient getPatient(@PathVariable Integer id) throws ResourceNotFoundException {
+    public Patient getPatientById(@PathVariable Integer id) throws ResourceNotFoundException {
         logger.info("Patient found successfully.");
         return patientService.findById(id);
+    }
 
+    /**
+     * Mapping a GET request in order to fetch the patient with the given name.
+     *
+     * @param familyName, method parameter which should be bound to the web request parameter.
+     * @return the patient with the given name.
+     * @throws ResourceNotFoundException if the patient we want to fetch is not found.
+     */
+    @GetMapping
+    public Patient getPatientByFamilyName(@RequestParam String familyName) throws ResourceNotFoundException {
+        logger.info("Patient found successfully.");
+        return patientService.findByFamilyName(familyName);
     }
 
     /**
@@ -57,8 +69,8 @@ public class PatientController {
     /**
      * Mapping a PUT request in order to update a patient's data.
      *
-     * @param id, method parameter which is used as the path variable.
-     * @param patient,  method parameter which should be bound to the web request body.
+     * @param id,      method parameter which is used as the path variable.
+     * @param patient, method parameter which should be bound to the web request body.
      * @return the updated patient's data.
      * @throws ResourceNotFoundException if the patient with the given id is not found.
      */

@@ -53,7 +53,34 @@ public class PatientServiceImplTest {
     @Test
     @DisplayName("Checking that ResourceNotException is thrown when patient's id does not exist")
     public void shouldThrowExceptionWhenPatientIdDoesNotExist() {
-        assertThrows(ResourceNotFoundException.class, () -> patientServiceImpl.findById(0));
+        doThrow(new ResourceNotFoundException("PatientNotFound", "The id provided is incorrect or does not exist: ", HttpStatus.NOT_FOUND)).when(patientRepository).findById(0);
+
+        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> patientServiceImpl.findById(0));
+
+        verify(patientRepository).findById(0);
+        assertEquals(exception.getMessage(), "The id provided is incorrect or does not exist: ");
+    }
+
+    @Test
+    @DisplayName("Checking that the patient is correctly fetched by its family name")
+    public void shouldFindPatientByItsFamilyName() {
+        when(patientRepository.findByFamily("TestBordeline")).thenReturn(Optional.ofNullable(patient));
+
+        Patient patientToFind = patientServiceImpl.findByFamilyName("TestBordeline");
+
+        verify(patientRepository).findByFamily(patient.getFamily());
+        assertEquals("TestBordeline", patientToFind.getFamily());
+    }
+
+    @Test
+    @DisplayName("Checking that ResourceNotException is thrown when patient's family name does not exist")
+    public void shouldThrowExceptionWhenPatientFamilyNameDoesNotExist() {
+        doThrow(new ResourceNotFoundException("PatientNotFound", "The name provided is incorrect or does not exist: ", HttpStatus.NOT_FOUND)).when(patientRepository).findByFamily("idrissi");
+
+        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> patientServiceImpl.findByFamilyName("idrissi"));
+
+        verify(patientRepository).findByFamily("idrissi");
+        assertEquals(exception.getMessage(), "The name provided is incorrect or does not exist: ");
     }
 
     @Test
@@ -98,7 +125,9 @@ public class PatientServiceImplTest {
     public void shouldThrowExceptionWhenPatientToUpdateIsNotFound() {
         doThrow(new ResourceNotFoundException("PatientNotFound", "The id provided is incorrect or does not exist: ", HttpStatus.NOT_FOUND)).when(patientRepository).findById(7);
 
-        assertThrows(ResourceNotFoundException.class, () -> patientServiceImpl.update(7, patient));
+        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> patientServiceImpl.update(7, patient));
+
         verify(patientRepository).findById(7);
+        assertEquals(exception.getMessage(), "The id provided is incorrect or does not exist: ");
     }
 }

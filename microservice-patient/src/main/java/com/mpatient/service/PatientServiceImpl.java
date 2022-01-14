@@ -40,6 +40,15 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     @Override
+    public Patient findByFamilyName(String familyName) throws ResourceNotFoundException {
+        logger.info("Patient was successfully fetched.");
+        return patientRepository.findByFamily(familyName).orElseThrow(() -> new ResourceNotFoundException("PatientNotFound", "The name provided is incorrect or does not exist: " + familyName, HttpStatus.NOT_FOUND));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public List<Patient> findAll() {
         logger.info("Patients data were successfully fetched.");
         return patientRepository.findAll();
