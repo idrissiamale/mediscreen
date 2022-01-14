@@ -34,7 +34,7 @@ public class PatientControllerTest {
 
     @BeforeEach
     public void setUpPerTest() {
-        patient = new Patient(1, "TestBordeline", "Test", "1945-06-24", "M", "2 High St", "200-333-4444");
+        patient = new Patient(1, "TestBorderline", "Test", "1945-06-24", "M", "2 High St", "200-333-4444");
         Patient patient2 = new Patient(2, "TestInDanger", "Test", "2004-06-18", "M", "3 Club Road", "300-444-5555");
         patients = new ArrayList<>();
         patients.add(patient);
@@ -43,8 +43,8 @@ public class PatientControllerTest {
     }
 
     @Test
-    @DisplayName("Checking that the controller returns status code 200 when the patient is correctly fetched")
-    public void shouldReturn200WhenPatientIsFound() throws Exception {
+    @DisplayName("Checking that the controller returns status code 200 when the patient is correctly fetched by its id")
+    public void shouldReturn200WhenPatientIsFoundByItsId() throws Exception {
         String jsonContent = mapper.writeValueAsString(patient);
         when(patientService.findById(patient.getId())).thenReturn(patient);
 
@@ -55,6 +55,22 @@ public class PatientControllerTest {
                 .andExpect(status().isOk());
 
         verify(patientService).findById(patient.getId());
+    }
+
+    @Test
+    @DisplayName("Checking that the controller returns status code 200 when the patient is correctly fetched by its family name")
+    public void shouldReturn200WhenPatientIsFoundByItsFamilyName() throws Exception {
+        String jsonContent = mapper.writeValueAsString(patient);
+        when(patientService.findByFamilyName(patient.getFamily())).thenReturn(patient);
+
+        mockMvc
+                .perform(get("/patient")
+                        .param("familyName", "TestBorderline")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonContent))
+                .andExpect(status().isOk());
+
+        verify(patientService).findByFamilyName(patient.getFamily());
     }
 
     @Test
