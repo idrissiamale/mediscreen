@@ -95,7 +95,7 @@ public class PatientServiceImplTest {
     }
 
     @Test
-    @DisplayName("Checking that the patient user is correctly saved")
+    @DisplayName("Checking that the patient is correctly saved")
     public void shouldReturnNewPatientWhenSaved() {
         PatientRegistrationDTO registration = new PatientRegistrationDTO("TestBordeline", "Test", "1945-06-24", "M", "2 High St", "200-333-4444");
         patient = new Patient(1, registration.getFamily(), registration.getGiven(), registration.getDob(), registration.getSex(), registration.getAddress(), registration.getPhone());

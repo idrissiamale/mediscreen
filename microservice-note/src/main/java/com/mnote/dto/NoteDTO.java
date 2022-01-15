@@ -1,8 +1,6 @@
 package com.mnote.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
@@ -10,6 +8,8 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class NoteDTO {
     @Id
     private String id;

@@ -29,6 +29,12 @@ public class PatientHistoryController {
         return patientHistoryService.findById(id);
     }
 
+    @GetMapping("/notes")
+    public List<NoteDTO> getAllNotes() {
+        logger.info("The notes were successfully fetched.");
+        return patientHistoryService.findAllNotes();
+    }
+
     @GetMapping(value = "/notes/{patId}")
     public List<NoteDTO> getPatientHistory(@PathVariable Integer patId) throws ResourceNotFoundException {
         logger.info("Patient's history found successfully.");

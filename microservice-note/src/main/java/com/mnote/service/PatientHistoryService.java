@@ -11,6 +11,8 @@ public interface PatientHistoryService {
 
     List<NoteDTO> findByPatId(Integer patId) throws ResourceNotFoundException;
 
+    List<NoteDTO> findAllNotes();
+
     Note save(NoteDTO noteDTO) throws IllegalArgumentException;
 
     NoteDTO update(String id, NoteDTO noteDTO) throws ResourceNotFoundException;

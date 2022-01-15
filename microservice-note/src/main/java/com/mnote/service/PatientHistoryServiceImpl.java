@@ -27,18 +27,25 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
 
     @Override
     public NoteDTO findById(String id) throws ResourceNotFoundException {
+        logger.info("Patient's note was successfully fetched.");
         return noteMapper.modelToDto(patientHistoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("NoteNotFound", "The id provided is incorrect or does not exist: " + id, HttpStatus.NOT_FOUND)));
     }
 
     @Override
     public List<NoteDTO> findByPatId(Integer patId) throws ResourceNotFoundException {
-        List<Note> notes = patientHistoryRepository.findByPatId(patId);
+        List<NoteDTO> notes = noteMapper.modelsToDto(patientHistoryRepository.findByPatId(patId));
         if (notes.isEmpty()) {
             throw new ResourceNotFoundException("PatientHistoryNotFound", "The id provided is incorrect or does not exist: " + patId, HttpStatus.NOT_FOUND);
         }
         logger.info("Patient's history was successfully fetched.");
-        return noteMapper.modelsToDto(patientHistoryRepository.findByPatId(patId));
+        return notes;
 
+    }
+
+    @Override
+    public List<NoteDTO> findAllNotes() {
+        logger.info("All notes were successfully fetched.");
+        return noteMapper.modelsToDto(patientHistoryRepository.findAll());
     }
 
     @Override
