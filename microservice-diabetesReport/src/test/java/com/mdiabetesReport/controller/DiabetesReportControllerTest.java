@@ -28,7 +28,7 @@ public class DiabetesReportControllerTest {
     @Autowired
     private MockMvc mockMvc;
     private Patient patient;
-    
+
     @MockBean
     DiabetesReportService diabetesReportService;
 

@@ -6,10 +6,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class HelperClass {
-    public static int getAge(String birthdate) throws DateTimeParseException {
+    public static int getAge(String birthDate) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate today = LocalDate.now();
-        LocalDate birthday = LocalDate.parse(birthdate, formatter);
+        LocalDate birthday = LocalDate.parse(birthDate, formatter);
         Period difference = Period.between(birthday, today);
         return difference.getYears();
     }
