@@ -1,6 +1,7 @@
 package com.mdiabetesReport.config;
 
-import com.mdiabetesReport.KeywordsFileReader;
+import com.mdiabetesReport.util.KeywordsFileReader;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class KeywordsFileReaderModule {
 
     @Bean
-    public KeywordsFileReader getKeywordsFileReader(String filePath) {
+    public KeywordsFileReader getKeywordsFileReader(@Value("${keywords.filepath}")String filePath) {
         return new KeywordsFileReader(filePath);
     }
 }

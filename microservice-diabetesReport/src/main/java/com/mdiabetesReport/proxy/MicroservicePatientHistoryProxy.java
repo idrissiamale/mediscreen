@@ -12,6 +12,9 @@ public interface MicroservicePatientHistoryProxy {
     @GetMapping(value = "patHistory/note/{id}")
     NoteDTO getNote(@PathVariable("id") String id) throws ResourceNotFoundException;
 
+    @GetMapping("patHistory/notes")
+    List<NoteDTO> getAllNotes();
+
     @GetMapping(value = "/patHistory/notes/{patId}")
     List<NoteDTO> getPatientHistory(@PathVariable("patId") Integer patId) throws ResourceNotFoundException;
 }

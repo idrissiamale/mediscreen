@@ -10,7 +10,10 @@ import java.util.List;
 @FeignClient(name = "microservice-patient", url = "${mpatient.url}")
 public interface MicroservicePatientProxy {
     @GetMapping(value = "/patient/{id}")
-    Patient getPatient(@PathVariable("id") Integer id) throws ResourceNotFoundException;
+    Patient getPatientById(@PathVariable("id") Integer id) throws ResourceNotFoundException;
+
+    @GetMapping(value = "/patient")
+    Patient getPatientByFamilyName(@RequestParam(value="familyName") String familyName) throws ResourceNotFoundException;
 
     @GetMapping(value = "/patient/list")
     List<Patient> getAllPatients();

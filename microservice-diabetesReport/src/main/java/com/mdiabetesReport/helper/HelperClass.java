@@ -13,4 +13,12 @@ public class HelperClass {
         Period difference = Period.between(birthday, today);
         return difference.getYears();
     }
+
+    public static boolean betweenInclusiveAndExclusive(int number, int low, int high) {
+        return number >= low && number < high;
+    }
+
+    public static boolean betweenInclusiveAndInclusive(int number, int low, int high) {
+        return number >= low && number <= high;
+    }
 }

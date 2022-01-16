@@ -1,4 +1,4 @@
-package com.mdiabetesReport;
+package com.mdiabetesReport.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +17,7 @@ public class KeywordsFileReader {
 
     }
 
-    public List<String> getKeywordsTextFIle() throws IOException {
+    public List<String> getKeywordsTextFile() throws IOException {
         return Files.readAllLines(file.toPath());
     }
 }
