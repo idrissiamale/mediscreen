@@ -102,6 +102,17 @@ public class PatientHistoryServiceImplTest {
     }
 
     @Test
+    @DisplayName("Checking that ResourceNotException is thrown when patient's id is not found")
+    public void shouldThrowExceptionWhenPatientHistoryIsNotFound() {
+        doThrow(new ResourceNotFoundException("PatientHistoryNotFound", "The id provided is incorrect or does not exist: ", HttpStatus.NOT_FOUND)).when(patientHistoryRepository).findByPatId(7);
+
+        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> patientHistoryServiceImpl.findByPatId(7));
+
+        verify(patientHistoryRepository).findByPatId(7);
+        assertEquals(exception.getMessage(), "The id provided is incorrect or does not exist: ");
+    }
+
+    @Test
     @DisplayName("Checking that the note is correctly saved")
     public void shouldReturnNewNoteWhenSaved() {
         NoteDTO noteDTO = new NoteDTO("3", 2, "Le patient déclare avoir mal au ventre");

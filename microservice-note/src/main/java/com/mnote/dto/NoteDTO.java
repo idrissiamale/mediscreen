@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class NoteDTO {

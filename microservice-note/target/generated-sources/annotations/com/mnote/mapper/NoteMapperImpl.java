@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-01-17T12:03:55+0100",
+    date = "2022-01-17T20:09:26+0100",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_251 (Oracle Corporation)"
 )
 @Component
@@ -36,11 +36,15 @@ public class NoteMapperImpl implements NoteMapper {
             return null;
         }
 
-        Note note = new Note();
+        String e = null;
+        String id = null;
+        Integer patId = null;
 
-        note.setE( noteDTO.getNote() );
-        note.setId( noteDTO.getId() );
-        note.setPatId( noteDTO.getPatId() );
+        e = noteDTO.getNote();
+        id = noteDTO.getId();
+        patId = noteDTO.getPatId();
+
+        Note note = new Note( id, patId, e );
 
         return note;
     }

@@ -9,8 +9,6 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-@ToString
-@NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "PatientHistory")
 public class Note {

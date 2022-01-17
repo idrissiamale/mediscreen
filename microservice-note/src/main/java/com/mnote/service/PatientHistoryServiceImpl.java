@@ -39,7 +39,6 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
         }
         logger.info("Patient's history was successfully fetched.");
         return notes;
-
     }
 
     @Override
