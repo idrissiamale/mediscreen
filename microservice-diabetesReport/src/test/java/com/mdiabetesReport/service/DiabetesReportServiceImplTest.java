@@ -34,7 +34,7 @@ public class DiabetesReportServiceImplTest {
     private KeywordsFileReader keywordsFileReader;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         String filePath = "/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/resources/keywords.txt";
         keywordsFileReader = new KeywordsFileReader(filePath);
         diabetesReportServiceImpl = new DiabetesReportServiceImpl(keywordsFileReader, microservicePatientProxy, microservicePatientHistoryProxy);
@@ -49,6 +49,26 @@ public class DiabetesReportServiceImplTest {
         diabetesReportServiceImpl.getPatientInfo(patient);
 
         assertEquals("Borderline", patientInfo.getDiabetesLevel());
+    }
+
+    @Test
+    @DisplayName("Checking that the PatientInfo is correctly fetched by comparing expected and the actual patient's id")
+    public void shouldReturnPatientInfoWithTheSameId() throws IOException {
+        PatientInfo patientInfo = new PatientInfo(patient.getId(), patient.getFamily(), patient.getGiven(), getAge(patient.getDob()), patient.getSex(), "Borderline");
+
+        diabetesReportServiceImpl.getPatientInfo(patient);
+
+        assertEquals(1, patientInfo.getId());
+    }
+
+    @Test
+    @DisplayName("Checking that the PatientInfo is correctly fetched by comparing expected and the actual patient's gender")
+    public void shouldReturnPatientInfoWithTheSameGender() throws IOException {
+        PatientInfo patientInfo = new PatientInfo(patient.getId(), patient.getFamily(), patient.getGiven(), getAge(patient.getDob()), patient.getSex(), "Borderline");
+
+        diabetesReportServiceImpl.getPatientInfo(patient);
+
+        assertEquals("M", patientInfo.getSex());
     }
 
     @Test

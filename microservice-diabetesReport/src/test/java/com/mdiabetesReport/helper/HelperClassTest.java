@@ -28,8 +28,20 @@ public class HelperClassTest {
     }
 
     @Test
-    @DisplayName("Checking that the given number is in range even if it's equal to the higher value (because it's inclusive)")
+    @DisplayName("Checking that the given number is in range")
     public void shouldReturnTrueWhenNumberIsInRange() {
+        int number = 2;
+        int low = 1;
+        int high = 3;
+
+        boolean inRange = betweenInclusiveAndInclusive(number, low, high);
+
+        assertTrue(inRange);
+    }
+
+    @Test
+    @DisplayName("Checking that the given number is in range even if it's equal to the highest value (because it's inclusive)")
+    public void shouldReturnTrueWhenNumberIsInRangeEvenIfItsEqualToTheHighestValue() {
         int number = 2;
         int low = 0;
         int high = 2;

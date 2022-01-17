@@ -5,7 +5,7 @@ import lombok.*;
 import javax.validation.constraints.NotNull;
 
 @Getter
-@Setter
+@AllArgsConstructor
 public class NoteDTO {
     private String id;
 

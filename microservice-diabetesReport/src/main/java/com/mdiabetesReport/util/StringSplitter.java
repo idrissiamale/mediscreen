@@ -8,8 +8,7 @@ public class StringSplitter {
     public static LinkedHashSet<String> getStringListOfSplitedNotes(List<String> patientNotes) {
         String delimiters = "[, ?.@*:/!]+";
         LinkedHashSet<String> stringList = new LinkedHashSet<>();
-        List<String> notes = patientNotes;
-        for (String patientNote : notes) {
+        for (String patientNote : patientNotes) {
             List<String> splitNotes = Arrays.asList(patientNote.split(delimiters));
             stringList.addAll(splitNotes);
         }
