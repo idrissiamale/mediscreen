@@ -14,7 +14,6 @@ import javax.validation.constraints.Size;
  */
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientRegistrationDTO {

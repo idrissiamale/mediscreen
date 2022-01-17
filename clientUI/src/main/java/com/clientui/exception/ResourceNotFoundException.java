@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
  */
 public class ResourceNotFoundException extends RuntimeException {
     private static final long serialVersionUID = 1L;
-    private Long resourceId;
     private String errorCode;
     private HttpStatus status;
 
@@ -20,27 +19,11 @@ public class ResourceNotFoundException extends RuntimeException {
     /**
      * Getters and setters.
      */
-    public Long getResourceId() {
-        return resourceId;
-    }
-
-    public void setResourceId(Long resourceId) {
-        this.resourceId = resourceId;
-    }
-
     public String getErrorCode() {
         return errorCode;
     }
 
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
-    }
-
     public HttpStatus getStatus() {
         return status;
-    }
-
-    public void setStatus(HttpStatus status) {
-        this.status = status;
     }
 }
