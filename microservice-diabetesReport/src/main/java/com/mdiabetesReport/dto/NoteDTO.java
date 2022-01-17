@@ -6,8 +6,6 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-@ToString
-@NoArgsConstructor
 public class NoteDTO {
     private String id;
 
@@ -16,9 +14,4 @@ public class NoteDTO {
 
     @NotNull
     private String note;
-
-    public NoteDTO(@NotNull Integer patId, @NotNull String note) {
-        this.patId = patId;
-        this.note = note;
-    }
 }

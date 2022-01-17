@@ -1,8 +1,6 @@
 package com.mdiabetesReport.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdiabetesReport.dto.PatientInfo;
-import com.mdiabetesReport.helper.HelperClass;
 import com.mdiabetesReport.model.Patient;
 import com.mdiabetesReport.service.DiabetesReportService;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,9 +11,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.mdiabetesReport.helper.HelperClass.getAge;
 import static org.mockito.Mockito.verify;
@@ -34,7 +29,7 @@ public class DiabetesReportControllerTest {
 
     @BeforeEach
     public void setUpPerTest() {
-        patient = new Patient(1, "TestBorderline", "Test", "1945-06-24", "M", "2 High St", "200-333-4444");
+        patient = new Patient(1, "TestBorderline", "Test", "1945-06-24", "M");
     }
 
     @Test

@@ -1,6 +1,5 @@
-package com.clientui;
+package com.clientui.controller;
 
-import com.clientui.controller.PatientController;
 import com.clientui.dto.PatientRegistrationDTO;
 import com.clientui.model.Patient;
 import com.clientui.proxy.MicroservicePatientProxy;
@@ -32,19 +31,17 @@ public class PatientControllerTest {
     private MockMvc mockMvc;
     private Patient patient;
     private Patient patientUpdated;
-    private PatientRegistrationDTO registration;
+    private PatientRegistrationDTO patientRegistrationDTO;
     private List<Patient> patients;
-
 
     @MockBean
     MicroservicePatientProxy microservicePatientProxy;
 
-
     @BeforeEach
     public void setup() {
         PatientController patientController = new PatientController(microservicePatientProxy);
-        registration = new PatientRegistrationDTO("TestBordeline", "Test", "1945-06-24", "M", "2 High St", "200-333-4444");
-        patient = new Patient(1, registration.getFamily(), registration.getGiven(), registration.getDob(), registration.getSex(), registration.getAddress(), registration.getPhone());
+        patientRegistrationDTO = new PatientRegistrationDTO("TestBordeline", "Test", "1945-06-24", "M", "2 High St", "200-333-4444");
+        patient = new Patient(1, patientRegistrationDTO.getFamily(), patientRegistrationDTO.getGiven(), patientRegistrationDTO.getDob(), patientRegistrationDTO.getSex(), patientRegistrationDTO.getAddress(), patientRegistrationDTO.getPhone());
         patientUpdated = new Patient(1, "TestBordeline", "Lili", "1945-06-24", "M", "2 High St", "200-333-4444");
         Patient patient2 = new Patient(2, "TestInDanger", "Test", "1980-06-24", "F", "3 Club Road", "300-444-5555");
         patients = new ArrayList<>();
@@ -110,7 +107,7 @@ public class PatientControllerTest {
                 .param("sex", "M")
                 .param("address", "2 High St")
                 .param("phone", "200-333-4444")
-                .sessionAttr("patientRegistrationDto", registration)
+                .sessionAttr("patientRegistrationDTO", patientRegistrationDTO)
         )
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/patient/add?success"))
@@ -118,30 +115,30 @@ public class PatientControllerTest {
                 .andExpect(model().hasNoErrors());
 
         verify(microservicePatientProxy).addPatient(any(PatientRegistrationDTO.class));
-        assertEquals("TestBordeline", registration.getFamily());
+        assertEquals("TestBordeline", patientRegistrationDTO.getFamily());
     }
 
     @Test
     @DisplayName("Checking that the registration form is returned with error message when there are errors on patient's personal informations")
     public void shouldReturnRegistrationFormWhenErrorsOnDateOfBirthAndGenderFields() throws Exception {
-        String dateOfbirth = " ";
-        String gender = null;
+        String dob = " ";
+        String sex = "Male";
 
         this.mockMvc.perform(post("/patient/validate").contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("family", "TestBordeline")
                 .param("given", "Test")
-                .param("dob", dateOfbirth)
-                .param("sex", gender)
+                .param("dob", dob)
+                .param("sex", sex)
                 .param("address", "2 High St")
                 .param("phone", "200-333-4444")
-                .sessionAttr("patientRegistrationDto", registration)
+                .sessionAttr("patientRegistrationDTO", patientRegistrationDTO)
         )
                 .andExpect(status().isOk())
                 .andExpect(view().name("registration"))
-                .andExpect(model().attributeHasFieldErrors("patientRegistrationDto", "dob"))
-                .andExpect(model().attributeHasFieldErrors("patientRegistrationDto", "sex"))
-                .andExpect(model().attribute("patientRegistrationDto", hasProperty("dob", is(dateOfbirth))))
-                .andExpect(model().attribute("patientRegistrationDto", hasProperty("sex", is(gender))));
+                .andExpect(model().attributeHasFieldErrors("patientRegistrationDTO", "dob"))
+                .andExpect(model().attributeHasFieldErrors("patientRegistrationDTO", "sex"))
+                .andExpect(model().attribute("patientRegistrationDTO", hasProperty("dob", is(dob))))
+                .andExpect(model().attribute("patientRegistrationDTO", hasProperty("sex", is(sex))));
 
         verifyNoInteractions(microservicePatientProxy);
     }
@@ -176,8 +173,7 @@ public class PatientControllerTest {
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/patient/list"))
                 .andExpect(redirectedUrl("/patient/list"))
-                .andExpect(model().hasNoErrors())
-                .andDo(print());
+                .andExpect(model().hasNoErrors());
 
         verify(microservicePatientProxy).updatePatient(anyInt(), any(Patient.class));
         assertEquals("Lili", patientUpdated.getGiven());
