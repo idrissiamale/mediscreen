@@ -1,0 +1,12 @@
+com/clientui/model/Note.class
+com/clientui/proxy/MicroservicePatientProxy.class
+com/clientui/exception/ControllerAdvisor.class
+com/clientui/model/Patient.class
+com/clientui/exception/ErrorResponse.class
+com/clientui/ClientUIApplication.class
+com/clientui/exception/ResourceNotFoundException.class
+com/clientui/proxy/MicroservicePatientHistoryProxy.class
+com/clientui/dto/PatientRegistrationDTO.class
+com/clientui/controller/PatientHistoryController.class
+com/clientui/dto/NoteDTO.class
+com/clientui/controller/PatientController.class

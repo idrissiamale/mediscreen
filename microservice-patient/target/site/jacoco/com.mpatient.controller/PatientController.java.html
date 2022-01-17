@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatientController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">microservice-patient</a> &gt; <a href="index.source.html" class="el_package">com.mpatient.controller</a> &gt; <span class="el_source">PatientController.java</span></div><h1>PatientController.java</h1><pre class="source lang-java linenums">package com.mpatient.controller;
+
+
+import com.mpatient.dto.PatientRegistrationDTO;
+import com.mpatient.exception.ResourceNotFoundException;
+import com.mpatient.model.Patient;
+import com.mpatient.service.PatientService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+
+/**
+ * Exposing Patient's REST services to other microservices.
+ *
+ * @see com.mpatient.service.PatientService
+ */
+@RestController
+@RequestMapping(&quot;/patient&quot;)
+public class PatientController {
+<span class="fc" id="L24">    private static final Logger logger = LogManager.getLogger(&quot;PatientController&quot;);</span>
+    private PatientService patientService;
+
+    @Autowired
+<span class="fc" id="L28">    public PatientController(PatientService patientService) {</span>
+<span class="fc" id="L29">        this.patientService = patientService;</span>
+<span class="fc" id="L30">    }</span>
+
+    /**
+     * Mapping a GET request in order to fetch the patient with the given id.
+     *
+     * @param id, method parameter which is used as the path variable.
+     * @return the patient with the given id.
+     * @throws ResourceNotFoundException if the patient we want to fetch is not found.
+     */
+    @GetMapping(value = &quot;/{id}&quot;)
+    public Patient getPatientById(@PathVariable Integer id) throws ResourceNotFoundException {
+<span class="fc" id="L41">        logger.info(&quot;Patient found successfully.&quot;);</span>
+<span class="fc" id="L42">        return patientService.findById(id);</span>
+    }
+
+    /**
+     * Mapping a GET request in order to fetch the patient with the given name.
+     *
+     * @param familyName, method parameter which should be bound to the web request parameter.
+     * @return the patient with the given name.
+     * @throws ResourceNotFoundException if the patient we want to fetch is not found.
+     */
+    @GetMapping
+    public Patient getPatientByFamilyName(@RequestParam String familyName) throws ResourceNotFoundException {
+<span class="fc" id="L54">        logger.info(&quot;Patient found successfully.&quot;);</span>
+<span class="fc" id="L55">        return patientService.findByFamilyName(familyName);</span>
+    }
+
+    /**
+     * Mapping a GET request in order to fetch patients.
+     *
+     * @return all patients saved in Mediscreen.
+     */
+    @GetMapping(value = &quot;/list&quot;)
+    public List&lt;Patient&gt; getAllPatients() {
+<span class="fc" id="L65">        logger.info(&quot;Patients data found successfully.&quot;);</span>
+<span class="fc" id="L66">        return patientService.findAll();</span>
+    }
+
+    /**
+     * Mapping a PUT request in order to update a patient's data.
+     *
+     * @param id,      method parameter which is used as the path variable.
+     * @param patient, method parameter which should be bound to the web request body.
+     * @return the updated patient's data.
+     * @throws ResourceNotFoundException if the patient with the given id is not found.
+     */
+    @PutMapping(value = &quot;/update/{id}&quot;)
+    public Patient updatePatient(@PathVariable Integer id, @Valid @RequestBody Patient patient) throws ResourceNotFoundException {
+<span class="fc" id="L79">        logger.info(&quot;Data successfully updated for the following patient: &quot; + patient.getFamily() + &quot; &quot; + patient.getGiven());</span>
+<span class="fc" id="L80">        return patientService.update(id, patient);</span>
+    }
+
+    /**
+     * Mapping a POST request in order to save a new patient.
+     *
+     * @param registration, method parameter which should be bound to the web request body.
+     * @return the newly saved patient.
+     * @throws IllegalArgumentException if the PatientRegistrationDto's fields are empty or null.
+     */
+    @PostMapping(value = &quot;/add&quot;)
+    public Patient addPatient(@Valid @RequestBody PatientRegistrationDTO registration) throws IllegalArgumentException {
+<span class="fc" id="L92">        logger.info(&quot;Patient saved successfully.&quot;);</span>
+<span class="fc" id="L93">        return patientService.save(registration);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

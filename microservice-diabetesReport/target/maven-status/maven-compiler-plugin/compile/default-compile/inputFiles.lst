@@ -1,0 +1,17 @@
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/service/DiabetesReportService.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/exception/ControllerAdvisor.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/util/KeywordsFileReader.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/filter/NoteFilter.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/config/KeywordsFileReaderModule.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/service/DiabetesReportServiceImpl.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/proxy/MicroservicePatientHistoryProxy.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/dto/NoteDTO.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/helper/HelperClass.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/model/Patient.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/exception/ErrorResponse.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/MicroserviceDiabetesApplication.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/controller/DiabetesReportController.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/util/StringSplitter.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/dto/PatientInfo.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/exception/ResourceNotFoundException.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/java/com/mdiabetesReport/proxy/MicroservicePatientProxy.java

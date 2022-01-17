@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mediscreen</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+<br>
+<br>
+<div class="container">
+    <div class="row d-flex justify-content-sm-center ">
+        <div class="col-md-4">
+            <h1>Add Note</h1>
+            <form th:action="@{/patHistory/validate}" method="post" th:object="${noteDTO}"
+                  class="border border-2 rounded w-100 p-3">
+                <div class="form-group mb-3 d-flex justify-content-center ">
+                    <button type="button" class="btn btn-secondary" style="background-color:#128499">Mediscreen</button>
+                </div>
+                <div class="form-group mb-3">
+                    <input type="text" class="form-control" id="inputPatId" placeholder="Patient Id"
+                           th:field="*{patId}">
+                    <span th:if="${#fields.hasErrors('patId')}" th:errors="*{patId}" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <textarea class="form-control" id="inputNote" placeholder="Add your notes or recommendations here" th:field="*{note}" rows="6"></textarea>
+                    <span th:if="${#fields.hasErrors('note')}" th:errors="*{note}" class="text-danger"></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="form-control btn btn-success" style="background-color:#128499" >Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

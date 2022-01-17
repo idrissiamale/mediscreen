@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatientHistoryController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">clientUI</a> &gt; <a href="index.source.html" class="el_package">com.clientui.controller</a> &gt; <span class="el_source">PatientHistoryController.java</span></div><h1>PatientHistoryController.java</h1><pre class="source lang-java linenums">package com.clientui.controller;
+
+import com.clientui.dto.NoteDTO;
+import com.clientui.dto.PatientRegistrationDTO;
+import com.clientui.model.Note;
+import com.clientui.model.Patient;
+import com.clientui.proxy.MicroservicePatientHistoryProxy;
+import com.clientui.proxy.MicroservicePatientProxy;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
+import java.util.List;
+
+@Controller
+@RequestMapping(&quot;/patHistory&quot;)
+public class PatientHistoryController {
+<span class="fc" id="L26">    private static final Logger logger = LogManager.getLogger(&quot;PatientHistoryController&quot;);</span>
+
+    private MicroservicePatientHistoryProxy microservicePatientHistoryProxy;
+
+    @Autowired
+<span class="fc" id="L31">    public PatientHistoryController(MicroservicePatientHistoryProxy microservicePatientHistoryProxy) {</span>
+<span class="fc" id="L32">        this.microservicePatientHistoryProxy = microservicePatientHistoryProxy;</span>
+<span class="fc" id="L33">    }</span>
+
+    @GetMapping(&quot;/notes/{patId}&quot;)
+    public String home(@PathVariable(&quot;patId&quot;) Integer patId, Model model) {
+<span class="fc" id="L37">        List&lt;NoteDTO&gt; notes = microservicePatientHistoryProxy.getPatientHistory(patId);</span>
+<span class="fc" id="L38">        model.addAttribute(&quot;notes&quot;, notes);</span>
+<span class="fc" id="L39">        return &quot;patientHistory&quot;;</span>
+    }
+
+    @GetMapping(&quot;/add&quot;)
+    public String showAddNoteForm(NoteDTO noteDTO) {
+<span class="fc" id="L44">        return &quot;add_note&quot;;</span>
+    }
+
+    @PostMapping(&quot;/validate&quot;)
+    public String addNote(@Valid NoteDTO noteDTO, BindingResult result, Model model) {
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L50">            return &quot;add_note&quot;;</span>
+        }
+<span class="fc" id="L52">        logger.info(&quot;Patient's note was saved successfully.&quot;);</span>
+<span class="fc" id="L53">        microservicePatientHistoryProxy.addNote(noteDTO);</span>
+<span class="fc" id="L54">        return &quot;redirect:/patHistory/notes/&quot; + noteDTO.getPatId();</span>
+    }
+
+    @GetMapping(&quot;/update/{id}&quot;)
+    public String showUpdateNoteForm(@PathVariable(&quot;id&quot;) String id, Model model) {
+<span class="fc" id="L59">        NoteDTO noteDTO = microservicePatientHistoryProxy.getNote(id);</span>
+<span class="fc" id="L60">        logger.info(&quot;Patient was successfully fetched.&quot;);</span>
+<span class="fc" id="L61">        model.addAttribute(&quot;noteDTO&quot;, noteDTO);</span>
+<span class="fc" id="L62">        return &quot;update_note&quot;;</span>
+    }
+
+    @PostMapping(&quot;/update/{id}&quot;)
+    public String updatePatient(@PathVariable(&quot;id&quot;) String id, @Valid NoteDTO noteDTO, BindingResult result, Model model) {
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L68">            return &quot;update_note&quot;;</span>
+        }
+<span class="fc" id="L70">        logger.info(&quot;Patient data were updated successfully.&quot;);</span>
+<span class="fc" id="L71">        microservicePatientHistoryProxy.updatePatientHistory(id, noteDTO);</span>
+<span class="fc" id="L72">        return &quot;redirect:/patHistory/notes/&quot; + noteDTO.getPatId();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

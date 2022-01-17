@@ -1,0 +1,12 @@
+/Users/idrissi/Workspace/MediscreenProject/clientUI/src/main/java/com/clientui/model/Note.java
+/Users/idrissi/Workspace/MediscreenProject/clientUI/src/main/java/com/clientui/exception/ControllerAdvisor.java
+/Users/idrissi/Workspace/MediscreenProject/clientUI/src/main/java/com/clientui/proxy/MicroservicePatientProxy.java
+/Users/idrissi/Workspace/MediscreenProject/clientUI/src/main/java/com/clientui/controller/PatientHistoryController.java
+/Users/idrissi/Workspace/MediscreenProject/clientUI/src/main/java/com/clientui/proxy/MicroservicePatientHistoryProxy.java
+/Users/idrissi/Workspace/MediscreenProject/clientUI/src/main/java/com/clientui/dto/PatientRegistrationDTO.java
+/Users/idrissi/Workspace/MediscreenProject/clientUI/src/main/java/com/clientui/exception/ResourceNotFoundException.java
+/Users/idrissi/Workspace/MediscreenProject/clientUI/src/main/java/com/clientui/dto/NoteDTO.java
+/Users/idrissi/Workspace/MediscreenProject/clientUI/src/main/java/com/clientui/controller/PatientController.java
+/Users/idrissi/Workspace/MediscreenProject/clientUI/src/main/java/com/clientui/exception/ErrorResponse.java
+/Users/idrissi/Workspace/MediscreenProject/clientUI/src/main/java/com/clientui/ClientUIApplication.java
+/Users/idrissi/Workspace/MediscreenProject/clientUI/src/main/java/com/clientui/model/Patient.java

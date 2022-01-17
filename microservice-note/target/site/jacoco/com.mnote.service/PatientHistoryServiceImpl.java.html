@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatientHistoryServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">microservice-note</a> &gt; <a href="index.source.html" class="el_package">com.mnote.service</a> &gt; <span class="el_source">PatientHistoryServiceImpl.java</span></div><h1>PatientHistoryServiceImpl.java</h1><pre class="source lang-java linenums">package com.mnote.service;
+
+import com.mnote.dto.NoteDTO;
+import com.mnote.exception.ResourceNotFoundException;
+import com.mnote.mapper.NoteMapper;
+import com.mnote.model.Note;
+import com.mnote.repository.PatientHistoryRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class PatientHistoryServiceImpl implements PatientHistoryService {
+<span class="fc" id="L18">    private static final Logger logger = LogManager.getLogger(&quot;PatientHistoryServiceImpl&quot;);</span>
+    private PatientHistoryRepository patientHistoryRepository;
+    private NoteMapper noteMapper;
+
+    @Autowired
+<span class="fc" id="L23">    public PatientHistoryServiceImpl(PatientHistoryRepository patientHistoryRepository, NoteMapper noteMapper) {</span>
+<span class="fc" id="L24">        this.patientHistoryRepository = patientHistoryRepository;</span>
+<span class="fc" id="L25">        this.noteMapper = noteMapper;</span>
+<span class="fc" id="L26">    }</span>
+
+    @Override
+    public NoteDTO findById(String id) throws ResourceNotFoundException {
+<span class="fc" id="L30">        logger.info(&quot;Patient's note was successfully fetched.&quot;);</span>
+<span class="pc" id="L31">        return noteMapper.modelToDto(patientHistoryRepository.findById(id).orElseThrow(() -&gt; new ResourceNotFoundException(&quot;NoteNotFound&quot;, &quot;The id provided is incorrect or does not exist: &quot; + id, HttpStatus.NOT_FOUND)));</span>
+    }
+
+    @Override
+    public List&lt;NoteDTO&gt; findByPatId(Integer patId) throws ResourceNotFoundException {
+<span class="fc" id="L36">        List&lt;NoteDTO&gt; notes = noteMapper.modelsToDto(patientHistoryRepository.findByPatId(patId));</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        if (notes.isEmpty()) {</span>
+<span class="nc" id="L38">            throw new ResourceNotFoundException(&quot;PatientHistoryNotFound&quot;, &quot;The id provided is incorrect or does not exist: &quot; + patId, HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L40">        logger.info(&quot;Patient's history was successfully fetched.&quot;);</span>
+<span class="fc" id="L41">        return notes;</span>
+    }
+
+    @Override
+    public List&lt;NoteDTO&gt; findAllNotes() {
+<span class="fc" id="L46">        logger.info(&quot;All notes were successfully fetched.&quot;);</span>
+<span class="fc" id="L47">        return noteMapper.modelsToDto(patientHistoryRepository.findAll());</span>
+    }
+
+    @Override
+    public Note save(NoteDTO noteDTO) throws IllegalArgumentException {
+<span class="fc" id="L52">        logger.info(&quot;Patient's note was saved successfully.&quot;);</span>
+<span class="fc" id="L53">        return patientHistoryRepository.save(noteMapper.dtoToModel(noteDTO));</span>
+    }
+
+    @Override
+    public NoteDTO update(String id, NoteDTO noteDTO) throws ResourceNotFoundException {
+<span class="fc" id="L58">        return noteMapper.modelToDto(patientHistoryRepository.findById(id).map(noteToUpdate -&gt; {</span>
+<span class="fc" id="L59">            noteToUpdate.setPatId(noteDTO.getPatId());</span>
+<span class="fc" id="L60">            noteToUpdate.setE(noteDTO.getNote());</span>
+<span class="fc" id="L61">            logger.info(&quot;Patient's history was updated successfully.&quot;);</span>
+<span class="fc" id="L62">            return patientHistoryRepository.save(noteToUpdate);</span>
+<span class="pc" id="L63">        }).orElseThrow(() -&gt; new ResourceNotFoundException(&quot;HistoryNotFound&quot;, &quot;The id provided is incorrect or does not exist: &quot; + id, HttpStatus.NOT_FOUND)));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

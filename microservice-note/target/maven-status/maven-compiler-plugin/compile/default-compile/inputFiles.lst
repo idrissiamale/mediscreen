@@ -1,0 +1,11 @@
+/Users/idrissi/Workspace/MediscreenProject/microservice-note/src/main/java/com/mnote/dto/NoteDTO.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-note/src/main/java/com/mnote/repository/PatientHistoryRepository.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-note/src/main/java/com/mnote/exception/ErrorResponse.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-note/src/main/java/com/mnote/controller/PatientHistoryController.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-note/src/main/java/com/mnote/exception/ResourceNotFoundException.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-note/src/main/java/com/mnote/exception/ControllerAdvisor.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-note/src/main/java/com/mnote/MicroserviceNoteApplication.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-note/src/main/java/com/mnote/model/Note.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-note/src/main/java/com/mnote/service/PatientHistoryService.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-note/src/main/java/com/mnote/service/PatientHistoryServiceImpl.java
+/Users/idrissi/Workspace/MediscreenProject/microservice-note/src/main/java/com/mnote/mapper/NoteMapper.java

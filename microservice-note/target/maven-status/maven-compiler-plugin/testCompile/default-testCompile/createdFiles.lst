@@ -1,0 +1,4 @@
+com/mnote/mapper/NoteMapperImplTest.class
+com/mnote/controller/PatientHistoryControllerTest.class
+com/mnote/MicroserviceNoteApplicationTests.class
+com/mnote/service/PatientHistoryServiceImplTest.class

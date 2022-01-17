@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatientRegistrationDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">clientUI</a> &gt; <a href="index.source.html" class="el_package">com.clientui.dto</a> &gt; <span class="el_source">PatientRegistrationDTO.java</span></div><h1>PatientRegistrationDTO.java</h1><pre class="source lang-java linenums">package com.clientui.dto;
+
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+/**
+ * A DTO class which gathers patient's information. It provides his/her family name, given name, date of birth, gender, address and phone.
+ * This DTO is annotated using Hibernate-Validation annotations. We use it to add constraints on fields, in order to validate user's inputs.
+ */
+@Getter
+<span class="fc" id="L16">@Setter</span>
+<span class="fc" id="L17">@NoArgsConstructor</span>
+<span class="fc" id="L18">@AllArgsConstructor</span>
+public class PatientRegistrationDTO {
+    @NotBlank(message = &quot;Please enter the first name&quot;)
+    @Size(min = 3, message = &quot;The first name should have at least 3 characters&quot;)
+    @Size(max = 45, message = &quot;The first name should have maximum 45 characters&quot;)
+<span class="fc" id="L23">    private String family;</span>
+
+    @NotBlank(message = &quot;Please enter the last name&quot;)
+    @Size(min = 3, message = &quot;The last name should have at least 3 characters&quot;)
+    @Size(max = 45, message = &quot;The last name should have maximum 45 characters&quot;)
+<span class="fc" id="L28">    private String given;</span>
+
+    @NotBlank(message = &quot;Please enter the date of birth&quot;)
+<span class="fc" id="L31">    private String dob;</span>
+
+    @NotBlank(message = &quot;Please enter the patient gender&quot;)
+    @Size(min = 1, message = &quot;The gender should have only 1 character : M or F&quot;)
+    @Size(max = 1, message = &quot;The gender should have only 1 character : M or F&quot;)
+<span class="fc" id="L36">    private String sex;</span>
+
+<span class="fc" id="L38">    private String address;</span>
+
+<span class="fc" id="L40">    private String phone;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

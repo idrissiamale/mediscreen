@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NoteFilter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">microservice-diabetesReport</a> &gt; <a href="index.source.html" class="el_package">com.mdiabetesReport.filter</a> &gt; <span class="el_source">NoteFilter.java</span></div><h1>NoteFilter.java</h1><pre class="source lang-java linenums">package com.mdiabetesReport.filter;
+
+import com.mdiabetesReport.dto.NoteDTO;
+import com.mdiabetesReport.model.Patient;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+<span class="nc" id="L10">public class NoteFilter {</span>
+    public static List&lt;String&gt; getNotesFilteredByPatient(List&lt;NoteDTO&gt; notes, List&lt;Patient&gt; patients) {
+<span class="fc" id="L12">        List&lt;String&gt; practitionerNotes = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L13" title="All 2 branches covered.">        for (Patient patient : patients) {</span>
+<span class="fc" id="L14">            List&lt;String&gt; patientNotes = notes.stream()</span>
+<span class="fc" id="L15">                    .filter(noteDTO -&gt; noteDTO.getPatId().equals(patient.getId()))</span>
+<span class="fc" id="L16">                    .map(NoteDTO::getNote)</span>
+<span class="fc" id="L17">                    .collect(Collectors.toCollection(ArrayList::new));</span>
+<span class="fc" id="L18">            practitionerNotes.addAll(patientNotes);</span>
+<span class="fc" id="L19">        }</span>
+<span class="fc" id="L20">        return practitionerNotes;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
