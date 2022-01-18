@@ -14,20 +14,19 @@ import java.io.IOException;
 public class DiabetesReportController {
     private DiabetesReportService diabetesReportService;
 
-
     @Autowired
     public DiabetesReportController(DiabetesReportService diabetesReportService) {
         this.diabetesReportService = diabetesReportService;
     }
 
-    @GetMapping(value = "/{patId}")
+    @PostMapping(value = "/{patId}")
     public String getPatientInfoByPatId(@PathVariable("patId") Integer patId) throws IOException, ResourceNotFoundException {
         Patient patient = diabetesReportService.getPatientById(patId);
         PatientInfo patientInfo = diabetesReportService.getPatientInfo(patient);
         return "Patient: " + patientInfo.getGiven() + " " + patientInfo.getFamilyName() + "(age " + patientInfo.getAge() + ") diabetes assessment is: " + patientInfo.getDiabetesLevel();
     }
 
-    @GetMapping
+    @PostMapping
     public String getPatientInfoByFamilyName(@RequestParam("familyName") String familyName) throws IOException, ResourceNotFoundException {
         Patient patient = diabetesReportService.getPatientByFamilyName(familyName);
         PatientInfo patientInfo = diabetesReportService.getPatientInfo(patient);

@@ -16,6 +16,7 @@ import static com.mdiabetesReport.helper.HelperClass.getAge;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = DiabetesReportController.class)
@@ -41,7 +42,7 @@ public class DiabetesReportControllerTest {
         String jsonContent = "Patient: " + patientInfo.getGiven() + " " + patientInfo.getFamilyName() + "(age " + patientInfo.getAge() + ") diabetes assessment is: " + patientInfo.getDiabetesLevel();
 
         mockMvc
-                .perform(get("/assess/{patId}", 1)
+                .perform(post("/assess/{patId}", 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonContent))
                 .andExpect(status().isOk());
@@ -58,7 +59,7 @@ public class DiabetesReportControllerTest {
         String jsonContent = "Patient: " + patientInfo.getGiven() + " " + patientInfo.getFamilyName() + "(age " + patientInfo.getAge() + ") diabetes assessment is: " + patientInfo.getDiabetesLevel();
 
         mockMvc
-                .perform(get("/assess")
+                .perform(post("/assess")
                         .param("familyName", "TestBorderline")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonContent))

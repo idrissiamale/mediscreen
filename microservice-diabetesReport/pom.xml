@@ -44,4 +44,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <build>
+        <finalName>microservice-diabetes-report</finalName>
+    </build>
 </project>
