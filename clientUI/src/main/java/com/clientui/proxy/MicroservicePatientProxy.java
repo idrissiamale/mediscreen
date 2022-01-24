@@ -18,7 +18,7 @@ public interface MicroservicePatientProxy {
      * Mapping a GET request in order to fetch the patient with the given id.
      *
      * @param id, method parameter which is used as the path variable.
-     * @return the patient with the given name.
+     * @return the patient with the given id.
      * @throws ResourceNotFoundException if the patient we want to fetch is not found.
      */
     @GetMapping(value = "/patient/{id}")
