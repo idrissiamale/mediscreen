@@ -37,6 +37,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-
+    <build>
+        <finalName>microservice-patient</finalName>
+    </build>
 </project>

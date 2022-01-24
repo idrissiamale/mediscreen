@@ -68,5 +68,6 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>microservice-note</finalName>
     </build>
 </project>
