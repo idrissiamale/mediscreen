@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
  * A custom exception created in order to be thrown in the controllers if the resource is not found.
  */
 public class ResourceNotFoundException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
     private String errorCode;
     private HttpStatus status;
 
@@ -17,7 +16,7 @@ public class ResourceNotFoundException extends RuntimeException {
     }
 
     /**
-     * Getters and setters.
+     * Getters.
      */
 
     public String getErrorCode() {

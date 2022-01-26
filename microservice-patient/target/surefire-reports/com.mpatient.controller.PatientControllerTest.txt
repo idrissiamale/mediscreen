@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.mpatient.controller.PatientControllerTest
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 47.325 s - in com.mpatient.controller.PatientControllerTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.603 s - in com.mpatient.controller.PatientControllerTest

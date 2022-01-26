@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NoteMapper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">microservice-note</a> &gt; <a href="index.source.html" class="el_package">com.mnote.mapper</a> &gt; <span class="el_source">NoteMapper.java</span></div><h1>NoteMapper.java</h1><pre class="source lang-java linenums">package com.mnote.mapper;
 
 import com.mnote.dto.NoteDTO;
+import com.mnote.exception.ResourceNotFoundException;
 import com.mnote.model.Note;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -8,16 +9,37 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
+/**
+ * Mapper interface which provides some methods to implement in order to map between Note entity and NoteDTO.
+ */
 @Mapper(componentModel = &quot;spring&quot;)
 public interface NoteMapper {
-<span class="nc" id="L13">    NoteMapper INSTANCE = Mappers.getMapper(NoteMapper.class);</span>
+<span class="nc" id="L17">    NoteMapper INSTANCE = Mappers.getMapper(NoteMapper.class);</span>
 
+    /**
+     * Converts Note entity to NoteDTO class.
+     *
+     * @param note - must not be null.
+     * @return the NoteDTO class.
+     */
     @Mapping(source = &quot;note.e&quot;, target = &quot;note&quot;)
     NoteDTO modelToDto(Note note);
 
+    /**
+     * Converts NoteDTO to Note entity.
+     *
+     * @param noteDTO - must not be null.
+     * @return the Note entity.
+     */
     @Mapping(source = &quot;noteDTO.note&quot;, target = &quot;e&quot;)
     Note dtoToModel(NoteDTO noteDTO);
 
+    /**
+     * Converts a list of notes to a list of NoteDTOs.
+     *
+     * @param notes - must not be null.
+     * @return the list of NoteDTO objects.
+     */
     List&lt;NoteDTO&gt; modelsToDto(List&lt;Note&gt; notes);
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

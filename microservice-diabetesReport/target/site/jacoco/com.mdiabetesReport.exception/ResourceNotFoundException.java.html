@@ -6,26 +6,25 @@ import org.springframework.http.HttpStatus;
  * A custom exception created in order to be thrown in the controllers if the resource is not found.
  */
 public class ResourceNotFoundException extends RuntimeException {
-    private static final long serialVersionUID = 1L;
     private String errorCode;
     private HttpStatus status;
 
     public ResourceNotFoundException(String errorCode, String message, HttpStatus status) {
-<span class="fc" id="L14">        super(message);</span>
-<span class="fc" id="L15">        this.errorCode = errorCode;</span>
-<span class="fc" id="L16">        this.status = status;</span>
-<span class="fc" id="L17">    }</span>
+<span class="fc" id="L13">        super(message);</span>
+<span class="fc" id="L14">        this.errorCode = errorCode;</span>
+<span class="fc" id="L15">        this.status = status;</span>
+<span class="fc" id="L16">    }</span>
 
     /**
-     * Getters and setters.
+     * Getters.
      */
 
     public String getErrorCode() {
-<span class="nc" id="L24">        return errorCode;</span>
+<span class="nc" id="L23">        return errorCode;</span>
     }
 
     public HttpStatus getStatus() {
-<span class="nc" id="L28">        return status;</span>
+<span class="nc" id="L27">        return status;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

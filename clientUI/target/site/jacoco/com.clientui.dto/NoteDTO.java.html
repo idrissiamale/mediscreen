@@ -3,21 +3,24 @@
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * A DTO class which gathers patient's notes/recommendations written by his/her practitioner.
+ * This DTO is annotated using Hibernate-Validation annotations. We use it to add constraints on fields, in order to validate user's inputs.
+ */
 @Getter
-<span class="fc" id="L12">@Setter</span>
-<span class="fc" id="L13">@AllArgsConstructor</span>
+<span class="fc" id="L15">@Setter</span>
+<span class="fc" id="L16">@AllArgsConstructor</span>
 public class NoteDTO {
-<span class="fc" id="L15">    private String id;</span>
+<span class="fc" id="L18">    private String id;</span>
 
     @NotNull(message = &quot;Please enter the id of the patient&quot;)
-<span class="fc" id="L18">    private Integer patId;</span>
+<span class="fc" id="L21">    private Integer patId;</span>
 
     @NotBlank(message = &quot;Please add your notes or recommendations&quot;)
-<span class="fc" id="L21">    private String note;</span>
+<span class="fc" id="L24">    private String note;</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

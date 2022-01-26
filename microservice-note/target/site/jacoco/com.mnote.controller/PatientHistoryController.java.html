@@ -12,45 +12,85 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Exposing Note's REST services to other microservices.
+ *
+ * @see com.mnote.service.PatientHistoryService
+ */
 @RestController
 @RequestMapping(value = &quot;/patHistory&quot;)
 public class PatientHistoryController {
-<span class="fc" id="L18">    private static final Logger logger = LogManager.getLogger(&quot;PatientHistoryController&quot;);</span>
+<span class="fc" id="L23">    private static final Logger logger = LogManager.getLogger(&quot;PatientHistoryController&quot;);</span>
     private PatientHistoryService patientHistoryService;
 
     @Autowired
-<span class="fc" id="L22">    public PatientHistoryController(PatientHistoryService patientHistoryService) {</span>
-<span class="fc" id="L23">        this.patientHistoryService = patientHistoryService;</span>
-<span class="fc" id="L24">    }</span>
+<span class="fc" id="L27">    public PatientHistoryController(PatientHistoryService patientHistoryService) {</span>
+<span class="fc" id="L28">        this.patientHistoryService = patientHistoryService;</span>
+<span class="fc" id="L29">    }</span>
 
+    /**
+     * Mapping a GET request in order to fetch the note with the given id.
+     *
+     * @param id, method parameter which is used as the path variable.
+     * @return the note with the given id.
+     * @throws ResourceNotFoundException if the note we want to fetch is not found.
+     */
     @GetMapping(value = &quot;/note/{id}&quot;)
     public NoteDTO getNote(@PathVariable String id) throws ResourceNotFoundException {
-<span class="fc" id="L28">        logger.info(&quot;Patient's note found successfully.&quot;);</span>
-<span class="fc" id="L29">        return patientHistoryService.findById(id);</span>
+<span class="fc" id="L40">        logger.info(&quot;Patient's note found successfully.&quot;);</span>
+<span class="fc" id="L41">        return patientHistoryService.findById(id);</span>
     }
 
+    /**
+     * Mapping a GET request in order to fetch notes.
+     *
+     * @return all notes saved in Mediscreen.
+     */
     @GetMapping(&quot;/notes&quot;)
     public List&lt;NoteDTO&gt; getAllNotes() {
-<span class="fc" id="L34">        logger.info(&quot;The notes were successfully fetched.&quot;);</span>
-<span class="fc" id="L35">        return patientHistoryService.findAllNotes();</span>
+<span class="fc" id="L51">        logger.info(&quot;The notes were successfully fetched.&quot;);</span>
+<span class="fc" id="L52">        return patientHistoryService.findAllNotes();</span>
     }
 
+    /**
+     * Mapping a GET request in order to fetch the notes of the Patient with the given id.
+     *
+     * @param patId, method parameter which is used as the path variable.
+     * @return the notes of the patient with the given id.
+     * @throws ResourceNotFoundException if the patient's id is not found.
+     * @see com.mnote.repository.PatientHistoryRepository
+     */
     @GetMapping(value = &quot;/notes/{patId}&quot;)
     public List&lt;NoteDTO&gt; getPatientHistory(@PathVariable Integer patId) throws ResourceNotFoundException {
-<span class="fc" id="L40">        logger.info(&quot;Patient's history found successfully.&quot;);</span>
-<span class="fc" id="L41">        return patientHistoryService.findByPatId(patId);</span>
+<span class="fc" id="L65">        logger.info(&quot;Patient's history found successfully.&quot;);</span>
+<span class="fc" id="L66">        return patientHistoryService.findByPatId(patId);</span>
     }
 
+    /**
+     * Mapping a PUT request in order to update a patient's note.
+     *
+     * @param id,      method parameter which is used as the path variable.
+     * @param noteDTO, method parameter which should be bound to the web request body.
+     * @return the updated patient's note.
+     * @throws ResourceNotFoundException if the note with the given id is not found.
+     */
     @PutMapping(value = &quot;/update/{id}&quot;)
     public NoteDTO updatePatientHistory(@PathVariable String id, @Valid @RequestBody NoteDTO noteDTO) throws ResourceNotFoundException {
-<span class="fc" id="L46">        logger.info(&quot;Note successfully updated for the following patient: &quot; + noteDTO.getPatId());</span>
-<span class="fc" id="L47">        return patientHistoryService.update(id, noteDTO);</span>
+<span class="fc" id="L79">        logger.info(&quot;Note successfully updated for the following patient: &quot; + noteDTO.getPatId());</span>
+<span class="fc" id="L80">        return patientHistoryService.update(id, noteDTO);</span>
     }
 
+    /**
+     * Mapping a POST request in order to save a new note.
+     *
+     * @param noteDTO, method parameter which should be bound to the web request body.
+     * @return the newly saved note.
+     * @throws IllegalArgumentException if the NoteDTO's fields are empty or null.
+     */
     @PostMapping(value = &quot;/add&quot;)
     public Note addNote(@Valid @RequestBody NoteDTO noteDTO) throws IllegalArgumentException {
-<span class="fc" id="L52">        logger.info(&quot;Patient's note saved successfully.&quot;);</span>
-<span class="fc" id="L53">        return patientHistoryService.save(noteDTO);</span>
+<span class="fc" id="L92">        logger.info(&quot;Patient's note saved successfully.&quot;);</span>
+<span class="fc" id="L93">        return patientHistoryService.save(noteDTO);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
