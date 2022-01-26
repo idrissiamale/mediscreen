@@ -7,6 +7,10 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * A model class which represents the patient's note(s). The entity is mapped to our NoSQL database.
+ * It is also annotated using Hibernate-Validation annotations in order to add constraints on fields and to validate user's inputs.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,5 +25,4 @@ public class Note {
 
     @NotNull
     private String e;
-
 }

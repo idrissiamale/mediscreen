@@ -17,7 +17,7 @@ public class ResourceNotFoundException extends RuntimeException {
     }
 
     /**
-     * Getters and setters.
+     * Getters.
      */
     public String getErrorCode() {
         return errorCode;

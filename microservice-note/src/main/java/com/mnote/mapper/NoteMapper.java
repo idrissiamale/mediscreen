@@ -8,6 +8,9 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
+/**
+ * Mapper interface which provides some methods to implement in order to map between Note entity and NoteDTO.
+ */
 @Mapper(componentModel = "spring")
 public interface NoteMapper {
     NoteMapper INSTANCE = Mappers.getMapper(NoteMapper.class);

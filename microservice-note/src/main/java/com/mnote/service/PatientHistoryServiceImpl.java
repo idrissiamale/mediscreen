@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Implementation of the PatientHistoryService interface.
+ *
+ * @see PatientHistoryService
+ */
 @Service
 public class PatientHistoryServiceImpl implements PatientHistoryService {
     private static final Logger logger = LogManager.getLogger("PatientHistoryServiceImpl");
@@ -25,12 +30,18 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
         this.noteMapper = noteMapper;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public NoteDTO findById(String id) throws ResourceNotFoundException {
         logger.info("Patient's note was successfully fetched.");
         return noteMapper.modelToDto(patientHistoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("NoteNotFound", "The id provided is incorrect or does not exist: " + id, HttpStatus.NOT_FOUND)));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<NoteDTO> findByPatId(Integer patId) throws ResourceNotFoundException {
         List<NoteDTO> notes = noteMapper.modelsToDto(patientHistoryRepository.findByPatId(patId));
@@ -41,18 +52,27 @@ public class PatientHistoryServiceImpl implements PatientHistoryService {
         return notes;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<NoteDTO> findAllNotes() {
         logger.info("All notes were successfully fetched.");
         return noteMapper.modelsToDto(patientHistoryRepository.findAll());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Note save(NoteDTO noteDTO) throws IllegalArgumentException {
         logger.info("Patient's note was saved successfully.");
         return patientHistoryRepository.save(noteMapper.dtoToModel(noteDTO));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public NoteDTO update(String id, NoteDTO noteDTO) throws ResourceNotFoundException {
         return noteMapper.modelToDto(patientHistoryRepository.findById(id).map(noteToUpdate -> {
