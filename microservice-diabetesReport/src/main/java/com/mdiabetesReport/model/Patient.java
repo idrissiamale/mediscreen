@@ -17,17 +17,11 @@ public class Patient implements Serializable {
 
     private Integer id;
 
-    @NotNull
-    @Size(min = 3, max = 45)
     private String family;
 
-    @NotNull
-    @Size(min = 3, max = 45)
     private String given;
 
-    @NotNull
     private String dob;
 
-    @NotNull
     private String sex;
 }

@@ -4,14 +4,15 @@ import lombok.*;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * A DTO class which gathers patient's notes/recommendations written by his/her practitioner.
+ */
 @Getter
 @AllArgsConstructor
 public class NoteDTO {
     private String id;
 
-    @NotNull
     private Integer patId;
 
-    @NotNull
     private String note;
 }
