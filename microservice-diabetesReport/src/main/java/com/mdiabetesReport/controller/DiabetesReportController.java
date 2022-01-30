@@ -36,7 +36,7 @@ public class DiabetesReportController {
      * @throws ResourceNotFoundException if the patient with the given id is not found.
      */
     @PostMapping(value = "/{patId}")
-    public String getPatientInfoByPatId(@PathVariable("patId") Integer patId) throws IOException, ResourceNotFoundException {
+    public String generateDiabetesAssessmentByPatId(@PathVariable("patId") Integer patId) throws IOException, ResourceNotFoundException {
         Patient patient = diabetesReportService.getPatientById(patId);
         PatientInfo patientInfo = diabetesReportService.getPatientInfo(patient);
         logger.info("Diabetes assessment generated successfully for the patient with the following id : " + patientInfo.getId());
@@ -52,7 +52,7 @@ public class DiabetesReportController {
      * @throws ResourceNotFoundException if the patient with the given family name is not found.
      */
     @PostMapping
-    public String getPatientInfoByFamilyName(@RequestParam("familyName") String familyName) throws IOException, ResourceNotFoundException {
+    public String generateDiabetesAssessmentByFamilyName(@RequestParam("familyName") String familyName) throws IOException, ResourceNotFoundException {
         Patient patient = diabetesReportService.getPatientByFamilyName(familyName);
         PatientInfo patientInfo = diabetesReportService.getPatientInfo(patient);
         logger.info("Diabetes assessment generated successfully for the patient with the following name : " + patientInfo.getFamilyName());
