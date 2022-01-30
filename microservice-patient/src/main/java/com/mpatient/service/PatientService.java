@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface PatientService {
     /**
-     * Retrieves a patient by its id.
+     * Retrieves a patient by his/her id.
      *
      * @param id - must not be null.
      * @return the Patient entity with the given id or Optional#empty() if none found.
@@ -23,7 +23,7 @@ public interface PatientService {
     Patient findById(Integer id) throws ResourceNotFoundException;
 
     /**
-     * Retrieves a patient by its family name.
+     * Retrieves a patient by his/her family name.
      *
      * @param family - must not be null.
      * @return the Patient entity with the given name or Optional#empty() if none found..
