@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.mpatient.service.PatientServiceImplTest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.333 s - in com.mpatient.service.PatientServiceImplTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.155 s - in com.mpatient.service.PatientServiceImplTest

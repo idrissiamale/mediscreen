@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.mpatient.MicroservicePatientApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.216 s - in com.mpatient.MicroservicePatientApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.821 s - in com.mpatient.MicroservicePatientApplicationTests
