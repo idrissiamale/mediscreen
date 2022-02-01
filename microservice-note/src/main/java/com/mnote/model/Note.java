@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -20,9 +21,9 @@ public class Note {
     @Field("_id")
     private String id;
 
-    @NotNull
+    @NotNull(message = "The patient's id is mandatory")
     private Integer patId;
 
-    @NotNull
+    @NotNull(message = "Notes are mandatory")
     private String e;
 }

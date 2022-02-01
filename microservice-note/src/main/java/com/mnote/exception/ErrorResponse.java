@@ -2,27 +2,43 @@ package com.mnote.exception;
 
 import org.springframework.http.HttpStatus;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * ErrorResponse's role is to store custom error messages.
  */
 public class ErrorResponse {
-    private String errorCode;
-    private String errorMessage;
-    private String requestURL;
     private HttpStatus status;
+    private String errorMessage;
+    private List<String> errors;
 
     public ErrorResponse() {
+    }
+
+    public ErrorResponse(HttpStatus status, String errorMessage, List<String> errors) {
+        super();
+        this.errorMessage = errorMessage;
+        this.status = status;
+        this.errors = errors;
+    }
+
+    public ErrorResponse(HttpStatus status, String errorMessage, String error) {
+        super();
+        this.errorMessage = errorMessage;
+        this.status = status;
+        errors = Collections.singletonList(error);
     }
 
     /**
      * Getters and setters.
      */
-    public String getErrorCode() {
-        return errorCode;
+    public HttpStatus getStatus() {
+        return status;
     }
 
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
+    public void setStatus(HttpStatus status) {
+        this.status = status;
     }
 
     public String getErrorMessage() {
@@ -33,19 +49,11 @@ public class ErrorResponse {
         this.errorMessage = errorMessage;
     }
 
-    public String getRequestURL() {
-        return requestURL;
+    public List<String> getErrors() {
+        return errors;
     }
 
-    public void setRequestURL(String requestURL) {
-        this.requestURL = requestURL;
-    }
-
-    public HttpStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(HttpStatus status) {
-        this.status = status;
+    public void setErrors(List<String> errors) {
+        this.errors = errors;
     }
 }

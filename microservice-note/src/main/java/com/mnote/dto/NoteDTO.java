@@ -17,9 +17,9 @@ public class NoteDTO {
     @Id
     private String id;
 
-    @NotNull
+    @NotNull(message = "The patient's id is mandatory")
     private Integer patId;
 
-    @NotNull
+    @NotNull(message = "Notes are mandatory")
     private String note;
 }

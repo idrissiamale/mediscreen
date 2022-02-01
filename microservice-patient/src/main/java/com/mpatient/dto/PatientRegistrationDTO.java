@@ -3,7 +3,6 @@ package com.mpatient.dto;
 import lombok.*;
 
 import javax.persistence.Column;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -15,19 +14,20 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientRegistrationDTO {
-    @NotNull
-    @Size(min = 3, max = 45)
+    @NotNull(message = "The first name is mandatory")
+    @Size(min = 3, max = 45, message = "The first name should have at least 3 characters")
     private String family;
 
-    @NotNull
-    @Size(min = 3, max = 45)
+    @NotNull(message = "The last name is mandatory")
+    @Size(min = 3, max = 45, message = "The last name should have at least 3 characters")
     private String given;
 
-    @NotNull
+    @NotNull(message = "The date of birth is mandatory")
     private String dob;
 
-    @NotNull
-    @Column(length = 1)
+    @NotNull(message = "The gender is mandatory")
+    @Size(min = 1, message = "The gender should have only 1 character : M or F")
+    @Size(max = 1, message = "The gender should have only 1 character : M or F")
     private String sex;
 
     private String address;
