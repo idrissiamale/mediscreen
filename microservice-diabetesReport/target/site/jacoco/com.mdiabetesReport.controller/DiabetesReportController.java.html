@@ -4,33 +4,59 @@ import com.mdiabetesReport.dto.PatientInfo;
 import com.mdiabetesReport.exception.ResourceNotFoundException;
 import com.mdiabetesReport.model.Patient;
 import com.mdiabetesReport.service.DiabetesReportService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
+/**
+ * DiabetesReportController's role is to generate the diabetes assessment for each patient of our application.
+ *
+ * @see com.mdiabetesReport.service.DiabetesReportService
+ */
 @RestController
 @RequestMapping(value = &quot;/assess&quot;)
 public class DiabetesReportController {
+<span class="fc" id="L22">    private static final Logger logger = LogManager.getLogger(&quot;DiabetesReportController&quot;);</span>
     private DiabetesReportService diabetesReportService;
 
     @Autowired
-<span class="fc" id="L18">    public DiabetesReportController(DiabetesReportService diabetesReportService) {</span>
-<span class="fc" id="L19">        this.diabetesReportService = diabetesReportService;</span>
-<span class="fc" id="L20">    }</span>
+<span class="fc" id="L26">    public DiabetesReportController(DiabetesReportService diabetesReportService) {</span>
+<span class="fc" id="L27">        this.diabetesReportService = diabetesReportService;</span>
+<span class="fc" id="L28">    }</span>
 
+    /**
+     * Mapping a POST request in order to generate the diabetes assessment for the patient with the given id.
+     *
+     * @param patId, method parameter which should be bound to the web request body. It refers to the patient's id.
+     * @return Patient's info including his/her diabetes level.
+     * @throws IOException               if an I/O error occurs reading from the Keywords file.
+     * @throws ResourceNotFoundException if the patient with the given id is not found.
+     */
     @PostMapping(value = &quot;/{patId}&quot;)
-    public String getPatientInfoByPatId(@PathVariable(&quot;patId&quot;) Integer patId) throws IOException, ResourceNotFoundException {
-<span class="fc" id="L24">        Patient patient = diabetesReportService.getPatientById(patId);</span>
-<span class="fc" id="L25">        PatientInfo patientInfo = diabetesReportService.getPatientInfo(patient);</span>
-<span class="fc" id="L26">        return &quot;Patient: &quot; + patientInfo.getGiven() + &quot; &quot; + patientInfo.getFamilyName() + &quot;(age &quot; + patientInfo.getAge() + &quot;) diabetes assessment is: &quot; + patientInfo.getDiabetesLevel();</span>
+    public String generateDiabetesAssessmentByPatId(@PathVariable(&quot;patId&quot;) Integer patId) throws IOException, ResourceNotFoundException {
+<span class="fc" id="L40">        Patient patient = diabetesReportService.getPatientById(patId);</span>
+<span class="fc" id="L41">        PatientInfo patientInfo = diabetesReportService.getPatientInfo(patient);</span>
+<span class="fc" id="L42">        logger.info(&quot;Diabetes assessment generated successfully for the patient with the following id : &quot; + patientInfo.getId());</span>
+<span class="fc" id="L43">        return &quot;Patient: &quot; + patientInfo.getGiven() + &quot; &quot; + patientInfo.getFamilyName() + &quot;(age &quot; + patientInfo.getAge() + &quot;) diabetes assessment is: &quot; + patientInfo.getDiabetesLevel();</span>
     }
 
+    /**
+     * Mapping a POST request in order to generate the diabetes assessment for the patient with the given family name.
+     *
+     * @param familyName, method parameter which should be bound to the web request body. It refers to the family name of the patient.
+     * @return Patient's info including his/her diabetes level.
+     * @throws IOException               if an I/O error occurs reading from the Keywords file.
+     * @throws ResourceNotFoundException if the patient with the given family name is not found.
+     */
     @PostMapping
-    public String getPatientInfoByFamilyName(@RequestParam(&quot;familyName&quot;) String familyName) throws IOException, ResourceNotFoundException {
-<span class="fc" id="L31">        Patient patient = diabetesReportService.getPatientByFamilyName(familyName);</span>
-<span class="fc" id="L32">        PatientInfo patientInfo = diabetesReportService.getPatientInfo(patient);</span>
-<span class="fc" id="L33">        return &quot;Patient: &quot; + patientInfo.getGiven() + &quot; &quot; + patientInfo.getFamilyName() + &quot;(age &quot; + patientInfo.getAge() + &quot;) diabetes assessment is: &quot; + patientInfo.getDiabetesLevel();</span>
+    public String generateDiabetesAssessmentByFamilyName(@RequestParam(&quot;familyName&quot;) String familyName) throws IOException, ResourceNotFoundException {
+<span class="fc" id="L56">        Patient patient = diabetesReportService.getPatientByFamilyName(familyName);</span>
+<span class="fc" id="L57">        PatientInfo patientInfo = diabetesReportService.getPatientInfo(patient);</span>
+<span class="fc" id="L58">        logger.info(&quot;Diabetes assessment generated successfully for the patient with the following name : &quot; + patientInfo.getFamilyName());</span>
+<span class="fc" id="L59">        return &quot;Patient: &quot; + patientInfo.getGiven() + &quot; &quot; + patientInfo.getFamilyName() + &quot;(age &quot; + patientInfo.getAge() + &quot;) diabetes assessment is: &quot; + patientInfo.getDiabetesLevel();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -5,21 +5,47 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-<span class="nc" id="L8">public class HelperClass {</span>
+/**
+ * A helper class used to convert the birth date into age and to check if an integer is in a given range.
+ */
+<span class="nc" id="L11">public class HelperClass {</span>
+    /**
+     * Converting birth date into years to get age.
+     *
+     * @param birthDate, it refers to person's date of birth.
+     * @return age which is the difference between the current date and the date of birth.
+     * @throws DateTimeParseException if an error occurs during parsing.
+     */
     public static int getAge(String birthDate) throws DateTimeParseException {
-<span class="fc" id="L10">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd&quot;);</span>
-<span class="fc" id="L11">        LocalDate today = LocalDate.now();</span>
-<span class="fc" id="L12">        LocalDate birthday = LocalDate.parse(birthDate, formatter);</span>
-<span class="fc" id="L13">        Period difference = Period.between(birthday, today);</span>
-<span class="fc" id="L14">        return difference.getYears();</span>
+<span class="fc" id="L20">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd&quot;);</span>
+<span class="fc" id="L21">        LocalDate today = LocalDate.now();</span>
+<span class="fc" id="L22">        LocalDate birthday = LocalDate.parse(birthDate, formatter);</span>
+<span class="fc" id="L23">        Period difference = Period.between(birthday, today);</span>
+<span class="fc" id="L24">        return difference.getYears();</span>
     }
 
+    /**
+     * Checking if the number is in the given range. The range is an exclusive one.
+     *
+     * @param number, it refers to the integer for which we want to check if it's within the range.
+     * @param low,    the minimum value of the range.
+     * @param high,   the maximum value of the range.
+     * @return true if the number is within the range. False if not.
+     */
     public static boolean betweenInclusiveAndExclusive(int number, int low, int high) {
-<span class="pc bpc" id="L18" title="1 of 4 branches missed.">        return number &gt;= low &amp;&amp; number &lt; high;</span>
+<span class="pc bpc" id="L36" title="1 of 4 branches missed.">        return number &gt;= low &amp;&amp; number &lt; high;</span>
     }
 
+    /**
+     * Checking if the number is in the given range. The range is an inclusive one.
+     *
+     * @param number, it refers to the integer for which we want to check if it's within the range.
+     * @param low,    the minimum value of the range.
+     * @param high,   the maximum value of the range.
+     * @return true if the number is within the range. False if not.
+     */
     public static boolean betweenInclusiveAndInclusive(int number, int low, int high) {
-<span class="pc bpc" id="L22" title="2 of 4 branches missed.">        return number &gt;= low &amp;&amp; number &lt;= high;</span>
+<span class="pc bpc" id="L48" title="2 of 4 branches missed.">        return number &gt;= low &amp;&amp; number &lt;= high;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

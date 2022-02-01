@@ -3,7 +3,6 @@
 import lombok.*;
 
 import javax.persistence.Column;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -11,23 +10,24 @@ import javax.validation.constraints.Size;
  * A DTO class which gathers patient's information. It provides his/her family name, given name, birthdate, gender, address and phone.
  */
 @Getter
-<span class="fc" id="L14">@Setter</span>
-<span class="fc" id="L15">@NoArgsConstructor</span>
-<span class="fc" id="L16">@AllArgsConstructor</span>
+<span class="fc" id="L13">@Setter</span>
+<span class="fc" id="L14">@NoArgsConstructor</span>
+<span class="fc" id="L15">@AllArgsConstructor</span>
 public class PatientRegistrationDTO {
-    @NotNull
-    @Size(min = 3, max = 45)
-<span class="fc" id="L20">    private String family;</span>
+    @NotNull(message = &quot;The first name is mandatory&quot;)
+    @Size(min = 3, max = 45, message = &quot;The first name should have at least 3 characters&quot;)
+<span class="fc" id="L19">    private String family;</span>
 
-    @NotNull
-    @Size(min = 3, max = 45)
-<span class="fc" id="L24">    private String given;</span>
+    @NotNull(message = &quot;The last name is mandatory&quot;)
+    @Size(min = 3, max = 45, message = &quot;The last name should have at least 3 characters&quot;)
+<span class="fc" id="L23">    private String given;</span>
 
-    @NotNull
-<span class="fc" id="L27">    private String dob;</span>
+    @NotNull(message = &quot;The date of birth is mandatory&quot;)
+<span class="fc" id="L26">    private String dob;</span>
 
-    @NotNull
-    @Column(length = 1)
+    @NotNull(message = &quot;The gender is mandatory&quot;)
+    @Size(min = 1, message = &quot;The gender should have only 1 character : M or F&quot;)
+    @Size(max = 1, message = &quot;The gender should have only 1 character : M or F&quot;)
 <span class="fc" id="L31">    private String sex;</span>
 
 <span class="fc" id="L33">    private String address;</span>

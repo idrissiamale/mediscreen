@@ -3,8 +3,8 @@ microservice-note,com.mnote.model,Note,4,29,0,0,0,5,1,6,1,6
 microservice-note,com.mnote,MicroserviceNoteApplication,5,3,0,0,2,1,1,1,1,1
 microservice-note,com.mnote.service,PatientHistoryServiceImpl,42,99,1,1,1,21,3,8,2,8
 microservice-note,com.mnote.controller,PatientHistoryController,0,58,0,0,0,14,0,7,0,7
-microservice-note,com.mnote.exception,ErrorResponse,31,0,0,0,14,0,9,0,9,0
-microservice-note,com.mnote.exception,ControllerAdvisor,50,3,0,0,11,1,2,1,2,1
+microservice-note,com.mnote.exception,ErrorResponse,28,21,0,0,13,8,5,4,5,4
+microservice-note,com.mnote.exception,ControllerAdvisor,33,30,0,0,7,10,2,2,2,2
 microservice-note,com.mnote.exception,ResourceNotFoundException,6,10,0,0,2,4,2,1,2,1
 microservice-note,com.mnote.mapper,NoteMapperImpl,6,76,3,5,3,22,3,5,0,4
 microservice-note,com.mnote.mapper,NoteMapper,5,0,0,0,1,0,1,0,1,0

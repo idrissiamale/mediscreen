@@ -17,10 +17,10 @@ public class NoteDTO {
     @Id
 <span class="fc" id="L18">    private String id;</span>
 
-    @NotNull
+    @NotNull(message = &quot;The patient's id is mandatory&quot;)
 <span class="fc" id="L21">    private Integer patId;</span>
 
-    @NotNull
+    @NotNull(message = &quot;Notes are mandatory&quot;)
 <span class="fc" id="L24">    private String note;</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

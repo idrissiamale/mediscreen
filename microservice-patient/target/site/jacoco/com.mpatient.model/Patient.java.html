@@ -25,23 +25,24 @@ public class Patient implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 <span class="fc" id="L26">    private Integer id;</span>
 
-    @NotNull
-    @Size(min = 3, max = 45)
+    @NotNull(message = &quot;The first name is mandatory&quot;)
+    @Size(min = 3, max = 45, message = &quot;The first name should have at least 3 characters&quot;)
 <span class="fc" id="L30">    private String family;</span>
 
-    @NotNull
-    @Size(min = 3, max = 45)
+    @NotNull(message = &quot;The last name is mandatory&quot;)
+    @Size(min = 3, max = 45, message = &quot;The last name should have at least 3 characters&quot;)
 <span class="fc" id="L34">    private String given;</span>
 
-    @NotNull
+    @NotNull(message = &quot;The date of birth is mandatory&quot;)
 <span class="fc" id="L37">    private String dob;</span>
 
-    @NotNull
-    @Column(length = 1)
-<span class="fc" id="L41">    private String sex;</span>
+    @NotNull(message = &quot;The gender is mandatory&quot;)
+    @Size(min = 1, message = &quot;The gender should have only 1 character : M or F&quot;)
+    @Size(max = 1, message = &quot;The gender should have only 1 character : M or F&quot;)
+<span class="fc" id="L42">    private String sex;</span>
 
-<span class="fc" id="L43">    private String address;</span>
+<span class="fc" id="L44">    private String address;</span>
 
-<span class="fc" id="L45">    private String phone;</span>
+<span class="fc" id="L46">    private String phone;</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

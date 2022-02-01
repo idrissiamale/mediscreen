@@ -5,12 +5,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Configuration's class which permits to instantiate the KeywordsFileReader class in order to use it throughout the application.
+ *
+ * @see com.mdiabetesReport.util.KeywordsFileReader
+ */
 @Configuration
-<span class="fc" id="L9">public class KeywordsFileReaderModule {</span>
+<span class="fc" id="L14">public class KeywordsFileReaderModule {</span>
 
     @Bean
     public KeywordsFileReader getKeywordsFileReader(@Value(&quot;${keywords.filepath}&quot;)String filePath) {
-<span class="fc" id="L13">        return new KeywordsFileReader(filePath);</span>
+<span class="fc" id="L18">        return new KeywordsFileReader(filePath);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

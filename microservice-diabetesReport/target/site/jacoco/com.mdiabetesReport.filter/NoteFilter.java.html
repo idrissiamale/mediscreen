@@ -7,17 +7,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-<span class="nc" id="L10">public class NoteFilter {</span>
+/**
+ * A filter class we are using to filter notes.
+ *
+ * @see com.mdiabetesReport.model.Patient
+ * @see com.mdiabetesReport.dto.NoteDTO
+ */
+<span class="nc" id="L16">public class NoteFilter {</span>
+    /**
+     * Fetching a list of string from notes filtered by the Patient's id.
+     *
+     * @param notes, it refers to the patient's notes.
+     * @param patients, it refers to all the patients of Mediscreen.
+     * @return a list of string from notes filtered by the patient's id.
+     */
     public static List&lt;String&gt; getNotesFilteredByPatient(List&lt;NoteDTO&gt; notes, List&lt;Patient&gt; patients) {
-<span class="fc" id="L12">        List&lt;String&gt; practitionerNotes = new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L13" title="All 2 branches covered.">        for (Patient patient : patients) {</span>
-<span class="fc" id="L14">            List&lt;String&gt; patientNotes = notes.stream()</span>
-<span class="fc" id="L15">                    .filter(noteDTO -&gt; noteDTO.getPatId().equals(patient.getId()))</span>
-<span class="fc" id="L16">                    .map(NoteDTO::getNote)</span>
-<span class="fc" id="L17">                    .collect(Collectors.toCollection(ArrayList::new));</span>
-<span class="fc" id="L18">            practitionerNotes.addAll(patientNotes);</span>
-<span class="fc" id="L19">        }</span>
-<span class="fc" id="L20">        return practitionerNotes;</span>
+<span class="fc" id="L25">        List&lt;String&gt; practitionerNotes = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        for (Patient patient : patients) {</span>
+<span class="fc" id="L27">            List&lt;String&gt; patientNotes = notes.stream()</span>
+<span class="fc" id="L28">                    .filter(noteDTO -&gt; noteDTO.getPatId().equals(patient.getId()))</span>
+<span class="fc" id="L29">                    .map(NoteDTO::getNote)</span>
+<span class="fc" id="L30">                    .collect(Collectors.toCollection(ArrayList::new));</span>
+<span class="fc" id="L31">            practitionerNotes.addAll(patientNotes);</span>
+<span class="fc" id="L32">        }</span>
+<span class="fc" id="L33">        return practitionerNotes;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

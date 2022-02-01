@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ControllerAdvisor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">microservice-patient</a> &gt; <a href="index.source.html" class="el_package">com.mpatient.exception</a> &gt; <span class="el_source">ControllerAdvisor.java</span></div><h1>ControllerAdvisor.java</h1><pre class="source lang-java linenums">package com.mpatient.exception;
 
+import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * ControllerAdvisor is used to centralize and to provide global exceptions handling for the controllers.
@@ -16,25 +22,37 @@ import javax.servlet.http.HttpServletRequest;
  * @see com.mpatient.exception.ErrorResponse
  */
 @ControllerAdvice
-<span class="fc" id="L19">public class ControllerAdvisor extends ResponseEntityExceptionHandler {</span>
+<span class="fc" id="L25">public class ControllerAdvisor extends ResponseEntityExceptionHandler {</span>
+    @Override
+    protected ResponseEntity&lt;Object&gt; handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
+<span class="fc" id="L32">        List&lt;String&gt; errorList = ex</span>
+<span class="fc" id="L33">                .getBindingResult()</span>
+<span class="fc" id="L34">                .getFieldErrors()</span>
+<span class="fc" id="L35">                .stream()</span>
+<span class="fc" id="L36">                .map(DefaultMessageSourceResolvable::getDefaultMessage)</span>
+<span class="fc" id="L37">                .collect(Collectors.toList());</span>
+<span class="fc" id="L38">        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage(), errorList);</span>
+<span class="fc" id="L39">        return handleExceptionInternal(</span>
+<span class="fc" id="L40">                ex, errorResponse, headers, errorResponse.getStatus(), request);</span>
+    }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity&lt;ErrorResponse&gt; HandleAllExceptions(HttpServletRequest req, Exception ex) {
-<span class="nc" id="L23">        ErrorResponse errorResponse = new ErrorResponse();</span>
-<span class="nc" id="L24">        errorResponse.setErrorCode(&quot;Technical Error&quot;);</span>
-<span class="nc" id="L25">        errorResponse.setErrorMessage(ex.getMessage());</span>
-<span class="nc" id="L26">        errorResponse.setRequestURL(req.getRequestURL().toString());</span>
-<span class="nc" id="L27">        return new ResponseEntity&lt;&gt;(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);</span>
+    public ResponseEntity&lt;ErrorResponse&gt; HandleAllExceptions(WebRequest request, Exception ex) {
+<span class="nc" id="L45">        ErrorResponse errorResponse = new ErrorResponse();</span>
+<span class="nc" id="L46">        errorResponse.setErrorMessage(ex.getMessage());</span>
+<span class="nc" id="L47">        return new ResponseEntity&lt;&gt;(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);</span>
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity&lt;ErrorResponse&gt; ResourceNotFoundError(HttpServletRequest req, ResourceNotFoundException ex) {
-<span class="nc" id="L32">        ErrorResponse errorResponse = new ErrorResponse();</span>
-<span class="nc" id="L33">        errorResponse.setStatus(ex.getStatus());</span>
-<span class="nc" id="L34">        errorResponse.setErrorCode(ex.getErrorCode());</span>
-<span class="nc" id="L35">        errorResponse.setErrorMessage(ex.getMessage());</span>
-<span class="nc" id="L36">        errorResponse.setRequestURL(req.getRequestURL().toString());</span>
-<span class="nc" id="L37">        return new ResponseEntity&lt;&gt;(errorResponse, ex.getStatus());</span>
+    public ResponseEntity&lt;ErrorResponse&gt; ResourceNotFoundError(WebRequest request, ResourceNotFoundException ex) {
+<span class="nc" id="L52">        ErrorResponse errorResponse = new ErrorResponse();</span>
+<span class="nc" id="L53">        errorResponse.setStatus(ex.getStatus());</span>
+<span class="nc" id="L54">        errorResponse.setErrorMessage(ex.getMessage());</span>
+<span class="nc" id="L55">        return new ResponseEntity&lt;&gt;(errorResponse, ex.getStatus());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
