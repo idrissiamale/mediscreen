@@ -35,7 +35,7 @@ public class DiabetesReportServiceImplTest {
 
     @BeforeEach
     public void setUp() {
-        String filePath = "/Users/idrissi/Workspace/MediscreenProject/microservice-diabetesReport/src/main/resources/keywords.txt";
+        String filePath = "/Users/idrissi/Workspace/mediscreenApplication/microservice-diabetesReport/src/main/resources/keywords.txt";
         keywordsFileReader = new KeywordsFileReader(filePath);
         diabetesReportServiceImpl = new DiabetesReportServiceImpl(keywordsFileReader, microservicePatientProxy, microservicePatientHistoryProxy);
         patient = new Patient(1, "TestBorderline", "Test", "1945-06-24", "M");
